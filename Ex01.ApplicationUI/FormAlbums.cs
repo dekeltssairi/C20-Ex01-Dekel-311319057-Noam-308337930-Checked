@@ -11,16 +11,13 @@ namespace Ex01.ApplicationUI
         public FormAlbums(FacebookObjectCollection<Album> i_Albums)
         {
             r_Albums = i_Albums;
-            m_AlbumIndex = 0;
             InitializeComponent();                      //desginer code
             initializeComponent();                      //our code
         }
 
         private void initializeComponent()
         {
-            albumPictureBox1.Load(r_Albums[m_AlbumIndex].PictureAlbumURL);
-            f_LabelAlbumName.Text = r_Albums[m_AlbumIndex].Name;
-            f_LabelCreatedDate.Text = string.Format("created date: {0} ", r_Albums[m_AlbumIndex].CreatedTime.ToString());  
+            albumBindingSource.DataSource = r_Albums;
         }
         private void previousLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
