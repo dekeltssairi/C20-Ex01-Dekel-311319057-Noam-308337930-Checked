@@ -36,6 +36,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckinProxy.cs" />
     <Compile Include="FormCheckinList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,7 +87,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Ex01.ApplicationEngine">
+    <Reference Include="Ex01.ApplicationEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\C20 Ex01 Dekel 311319057 Noam 308337930\Ex01.ApplicationEngine\bin\Debug\Ex01.ApplicationEngine.dll</HintPath>
     </Reference>
     <Reference Include="Facebook">
@@ -128,7 +130,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\DataSources\CheckinProxy.datasource" />
     <None Include="Properties\DataSources\FacebookWrapper.ObjectModel.Album.datasource" />
+    <None Include="Properties\DataSources\FacebookWrapper.ObjectModel.Checkin.datasource" />
     <None Include="Properties\DataSources\FacebookWrapper.ObjectModel.User.datasource" />
     <None Include="Resources\Contact-Facebook_Share_Image.jpg" />
   </ItemGroup>
@@ -149,6 +153,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Artboard-1-copy-5%402x_220x120.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Ex01\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

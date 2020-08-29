@@ -1,19 +1,33 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.CodeDom;
+using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
+
 
 namespace Ex01.ApplicationUI
 {
     public partial class FormCheckinList : Form
     {
+
+        private readonly FacebookObjectCollection<CheckinProxy> m_Checkins;
         public FormCheckinList(FacebookObjectCollection<Checkin> i_Checkins)
         {
-            InitializeComponent();
-            f_ListBoxCheckins.Items.Clear();
-
+            m_Checkins = new FacebookObjectCollection<CheckinProxy>();
             foreach (Checkin checkin in i_Checkins)
             {
-                f_ListBoxCheckins.Items.Add(checkin.Place.Name);
+                m_Checkins.Add(new CheckinProxy { Checkin = checkin });
             }
+            InitializeComponent();
+            initializeComponent();
         }
+
+
+        private void initializeComponent()
+        {
+            checkinProxyBindingSource.DataSource = m_Checkins;
+        }
+
     }
 }
+
+
