@@ -1,0 +1,13 @@
+==========================Exercise Checking Report==========================
+Exercise No...........: 1
+First Student Details.: 311319057 -Dekel Tsairi
+Second Student Details: 308337930- Noam Cohen
+Delivery Date.........: 16 - August - 2011
+Delivered In Delay....: no
+Delay Reason..........: .
+Comment...............: Dear "Bodek", you should put the the external Dll 
+						in the Libs folder which under the 
+						Ex01.ApplicationEngine Folder.
+						the AppConfig will take place 
+						and no additional References/Act are necessary
+========================End Exercise Checking Report========================

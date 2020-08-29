@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F04F0350-6264-48C0-BB8E-575E436C5920}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Ex01.ApplicationUI</RootNamespace>
+    <AssemblyName>Ex01.ApplicationUI</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FormCheckinList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCheckinList.Designer.cs">
+      <DependentUpon>FormCheckinList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMosiftDiggingFriend.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMosiftDiggingFriend.Designer.cs">
+      <DependentUpon>FormMosiftDiggingFriend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormCovid19CheckedIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCovid19CheckedIn.Designer.cs">
+      <DependentUpon>FormCovid19CheckedIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormFriendList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFriendList.Designer.cs">
+      <DependentUpon>FormFriendList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAlbums.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAlbums.Designer.cs">
+      <DependentUpon>FormAlbums.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPost.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPost.Designer.cs">
+      <DependentUpon>FormPost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Ex01.ApplicationEngine">
+      <HintPath>..\..\C20 Ex01 Dekel 311319057 Noam 308337930\Ex01.ApplicationEngine\bin\Debug\Ex01.ApplicationEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="Facebook">
+      <HintPath>..\..\C20 Ex01 Dekel 311319057 Noam 308337930\Ex01.ApplicationEngine\bin\Debug\Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="FbGraphApiWrapper">
+      <HintPath>..\..\C20 Ex01 Dekel 311319057 Noam 308337930\Ex01.ApplicationEngine\bin\Debug\FbGraphApiWrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FormCheckinList.resx">
+      <DependentUpon>FormCheckinList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMosiftDiggingFriend.resx">
+      <DependentUpon>FormMosiftDiggingFriend.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCovid19CheckedIn.resx">
+      <DependentUpon>FormCovid19CheckedIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFriendList.resx">
+      <DependentUpon>FormFriendList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAlbums.resx">
+      <DependentUpon>FormAlbums.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\FacebookWrapper.ObjectModel.User.datasource" />
+    <None Include="Resources\Contact-Facebook_Share_Image.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\facebook-logo1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\people.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-חופר-ציור_csp27622896.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-spade-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Artboard-1-copy-5%402x_220x120.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
