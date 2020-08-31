@@ -30,31 +30,31 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAlbums));
             System.Windows.Forms.Label descriptionLabel;
             System.Windows.Forms.Label imageAlbumLabel;
             System.Windows.Forms.Label nameLabel;
             System.Windows.Forms.Label createdTimeLabel1;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAlbums));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.f_AlbumList = new System.Windows.Forms.ListBox();
             this.albumBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.createdTimeDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.descriptionLabel1 = new System.Windows.Forms.Label();
+            this.imageAlbumPictureBox = new System.Windows.Forms.PictureBox();
+            this.nameLabel1 = new System.Windows.Forms.Label();
             this.albumBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.albumBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
-            this.descriptionLabel1 = new System.Windows.Forms.Label();
-            this.imageAlbumPictureBox = new System.Windows.Forms.PictureBox();
-            this.nameLabel1 = new System.Windows.Forms.Label();
-            this.createdTimeDateTimePicker = new System.Windows.Forms.DateTimePicker();
             descriptionLabel = new System.Windows.Forms.Label();
             imageAlbumLabel = new System.Windows.Forms.Label();
             nameLabel = new System.Windows.Forms.Label();
@@ -64,10 +64,46 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.albumBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageAlbumPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.albumBindingNavigator)).BeginInit();
             this.albumBindingNavigator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imageAlbumPictureBox)).BeginInit();
             this.SuspendLayout();
+            // 
+            // descriptionLabel
+            // 
+            descriptionLabel.AutoSize = true;
+            descriptionLabel.Location = new System.Drawing.Point(20, 102);
+            descriptionLabel.Name = "descriptionLabel";
+            descriptionLabel.Size = new System.Drawing.Size(83, 17);
+            descriptionLabel.TabIndex = 2;
+            descriptionLabel.Text = "Description:";
+            // 
+            // imageAlbumLabel
+            // 
+            imageAlbumLabel.AutoSize = true;
+            imageAlbumLabel.Location = new System.Drawing.Point(20, 128);
+            imageAlbumLabel.Name = "imageAlbumLabel";
+            imageAlbumLabel.Size = new System.Drawing.Size(93, 17);
+            imageAlbumLabel.TabIndex = 4;
+            imageAlbumLabel.Text = "Image Album:";
+            // 
+            // nameLabel
+            // 
+            nameLabel.AutoSize = true;
+            nameLabel.Location = new System.Drawing.Point(20, 181);
+            nameLabel.Name = "nameLabel";
+            nameLabel.Size = new System.Drawing.Size(49, 17);
+            nameLabel.TabIndex = 6;
+            nameLabel.Text = "Name:";
+            // 
+            // createdTimeLabel1
+            // 
+            createdTimeLabel1.AutoSize = true;
+            createdTimeLabel1.Location = new System.Drawing.Point(16, 73);
+            createdTimeLabel1.Name = "createdTimeLabel1";
+            createdTimeLabel1.Size = new System.Drawing.Size(97, 17);
+            createdTimeLabel1.TabIndex = 7;
+            createdTimeLabel1.Text = "Created Time:";
             // 
             // splitContainer1
             // 
@@ -104,10 +140,46 @@
             this.f_AlbumList.Name = "f_AlbumList";
             this.f_AlbumList.Size = new System.Drawing.Size(262, 452);
             this.f_AlbumList.TabIndex = 0;
+      
             // 
             // albumBindingSource
             // 
             this.albumBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Album);
+            // 
+            // createdTimeDateTimePicker
+            // 
+            this.createdTimeDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.albumBindingSource, "CreatedTime", true));
+            this.createdTimeDateTimePicker.Location = new System.Drawing.Point(119, 68);
+            this.createdTimeDateTimePicker.Name = "createdTimeDateTimePicker";
+            this.createdTimeDateTimePicker.Size = new System.Drawing.Size(200, 22);
+            this.createdTimeDateTimePicker.TabIndex = 8;
+            // 
+            // descriptionLabel1
+            // 
+            this.descriptionLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.albumBindingSource, "Description", true));
+            this.descriptionLabel1.Location = new System.Drawing.Point(123, 102);
+            this.descriptionLabel1.Name = "descriptionLabel1";
+            this.descriptionLabel1.Size = new System.Drawing.Size(100, 23);
+            this.descriptionLabel1.TabIndex = 3;
+            this.descriptionLabel1.Text = "label1";
+            // 
+            // imageAlbumPictureBox
+            // 
+            this.imageAlbumPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.albumBindingSource, "ImageAlbum", true));
+            this.imageAlbumPictureBox.Location = new System.Drawing.Point(123, 128);
+            this.imageAlbumPictureBox.Name = "imageAlbumPictureBox";
+            this.imageAlbumPictureBox.Size = new System.Drawing.Size(100, 50);
+            this.imageAlbumPictureBox.TabIndex = 5;
+            this.imageAlbumPictureBox.TabStop = false;
+            // 
+            // nameLabel1
+            // 
+            this.nameLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.albumBindingSource, "Name", true));
+            this.nameLabel1.Location = new System.Drawing.Point(123, 181);
+            this.nameLabel1.Name = "nameLabel1";
+            this.nameLabel1.Size = new System.Drawing.Size(100, 23);
+            this.nameLabel1.TabIndex = 7;
+            this.nameLabel1.Text = "label1";
             // 
             // albumBindingNavigator
             // 
@@ -136,9 +208,34 @@
             this.albumBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.albumBindingNavigator.Name = "albumBindingNavigator";
             this.albumBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.albumBindingNavigator.Size = new System.Drawing.Size(668, 31);
+            this.albumBindingNavigator.Size = new System.Drawing.Size(668, 27);
             this.albumBindingNavigator.TabIndex = 1;
             this.albumBindingNavigator.Text = "bindingNavigator1";
+            // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorAddNewItem.Text = "Add new";
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(45, 24);
+            this.bindingNavigatorCountItem.Text = "of {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
+            // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorDeleteItem.Text = "Delete";
             // 
             // bindingNavigatorMoveFirstItem
             // 
@@ -146,7 +243,7 @@
             this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
             this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
             this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(29, 24);
             this.bindingNavigatorMoveFirstItem.Text = "Move first";
             // 
             // bindingNavigatorMovePreviousItem
@@ -155,13 +252,13 @@
             this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
             this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
             this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(29, 24);
             this.bindingNavigatorMovePreviousItem.Text = "Move previous";
             // 
             // bindingNavigatorSeparator
             // 
             this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 31);
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 27);
             // 
             // bindingNavigatorPositionItem
             // 
@@ -173,17 +270,10 @@
             this.bindingNavigatorPositionItem.Text = "0";
             this.bindingNavigatorPositionItem.ToolTipText = "Current position";
             // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(45, 28);
-            this.bindingNavigatorCountItem.Text = "of {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
-            // 
             // bindingNavigatorSeparator1
             // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 31);
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
             // bindingNavigatorMoveNextItem
             // 
@@ -191,7 +281,7 @@
             this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
             this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
             this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(29, 24);
             this.bindingNavigatorMoveNextItem.Text = "Move next";
             // 
             // bindingNavigatorMoveLastItem
@@ -200,31 +290,13 @@
             this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
             this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
             this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(29, 24);
             this.bindingNavigatorMoveLastItem.Text = "Move last";
             // 
             // bindingNavigatorSeparator2
             // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 31);
-            // 
-            // bindingNavigatorAddNewItem
-            // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 28);
-            this.bindingNavigatorAddNewItem.Text = "Add new";
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 28);
-            this.bindingNavigatorDeleteItem.Text = "Delete";
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 27);
             // 
             // albumBindingNavigatorSaveItem
             // 
@@ -232,79 +304,8 @@
             this.albumBindingNavigatorSaveItem.Enabled = false;
             this.albumBindingNavigatorSaveItem.Image = ((System.Drawing.Image)(resources.GetObject("albumBindingNavigatorSaveItem.Image")));
             this.albumBindingNavigatorSaveItem.Name = "albumBindingNavigatorSaveItem";
-            this.albumBindingNavigatorSaveItem.Size = new System.Drawing.Size(29, 28);
+            this.albumBindingNavigatorSaveItem.Size = new System.Drawing.Size(29, 24);
             this.albumBindingNavigatorSaveItem.Text = "Save Data";
-            // 
-            // descriptionLabel
-            // 
-            descriptionLabel.AutoSize = true;
-            descriptionLabel.Location = new System.Drawing.Point(20, 102);
-            descriptionLabel.Name = "descriptionLabel";
-            descriptionLabel.Size = new System.Drawing.Size(83, 17);
-            descriptionLabel.TabIndex = 2;
-            descriptionLabel.Text = "Description:";
-            // 
-            // descriptionLabel1
-            // 
-            this.descriptionLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.albumBindingSource, "Description", true));
-            this.descriptionLabel1.Location = new System.Drawing.Point(123, 102);
-            this.descriptionLabel1.Name = "descriptionLabel1";
-            this.descriptionLabel1.Size = new System.Drawing.Size(100, 23);
-            this.descriptionLabel1.TabIndex = 3;
-            this.descriptionLabel1.Text = "label1";
-            // 
-            // imageAlbumLabel
-            // 
-            imageAlbumLabel.AutoSize = true;
-            imageAlbumLabel.Location = new System.Drawing.Point(20, 128);
-            imageAlbumLabel.Name = "imageAlbumLabel";
-            imageAlbumLabel.Size = new System.Drawing.Size(93, 17);
-            imageAlbumLabel.TabIndex = 4;
-            imageAlbumLabel.Text = "Image Album:";
-            // 
-            // imageAlbumPictureBox
-            // 
-            this.imageAlbumPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.albumBindingSource, "ImageAlbum", true));
-            this.imageAlbumPictureBox.Location = new System.Drawing.Point(123, 128);
-            this.imageAlbumPictureBox.Name = "imageAlbumPictureBox";
-            this.imageAlbumPictureBox.Size = new System.Drawing.Size(100, 50);
-            this.imageAlbumPictureBox.TabIndex = 5;
-            this.imageAlbumPictureBox.TabStop = false;
-            // 
-            // nameLabel
-            // 
-            nameLabel.AutoSize = true;
-            nameLabel.Location = new System.Drawing.Point(20, 181);
-            nameLabel.Name = "nameLabel";
-            nameLabel.Size = new System.Drawing.Size(49, 17);
-            nameLabel.TabIndex = 6;
-            nameLabel.Text = "Name:";
-            // 
-            // nameLabel1
-            // 
-            this.nameLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.albumBindingSource, "Name", true));
-            this.nameLabel1.Location = new System.Drawing.Point(123, 181);
-            this.nameLabel1.Name = "nameLabel1";
-            this.nameLabel1.Size = new System.Drawing.Size(100, 23);
-            this.nameLabel1.TabIndex = 7;
-            this.nameLabel1.Text = "label1";
-            // 
-            // createdTimeLabel1
-            // 
-            createdTimeLabel1.AutoSize = true;
-            createdTimeLabel1.Location = new System.Drawing.Point(16, 73);
-            createdTimeLabel1.Name = "createdTimeLabel1";
-            createdTimeLabel1.Size = new System.Drawing.Size(97, 17);
-            createdTimeLabel1.TabIndex = 7;
-            createdTimeLabel1.Text = "Created Time:";
-            // 
-            // createdTimeDateTimePicker
-            // 
-            this.createdTimeDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.albumBindingSource, "CreatedTime", true));
-            this.createdTimeDateTimePicker.Location = new System.Drawing.Point(119, 68);
-            this.createdTimeDateTimePicker.Name = "createdTimeDateTimePicker";
-            this.createdTimeDateTimePicker.Size = new System.Drawing.Size(200, 22);
-            this.createdTimeDateTimePicker.TabIndex = 8;
             // 
             // FormAlbums
             // 
@@ -321,10 +322,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.albumBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageAlbumPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.albumBindingNavigator)).EndInit();
             this.albumBindingNavigator.ResumeLayout(false);
             this.albumBindingNavigator.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imageAlbumPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Windows.Forms;
 using Ex01.ApplicationEngine;
@@ -92,33 +93,17 @@ namespace Ex01.ApplicationUI
 
         private void clearForm()
         {
-           this.Dispose(false);
-           new FormMain().Show();
+            this.Dispose(false);
+            new FormMain().Show();
         }
 
-        private void fetchPosts()
+        private void onFetchPostsThread()
         {
 
             foreach (Post post in r_FBConnector.LoggedUser.Posts)
             {
-                string itemText;
-                if (post.Message != null)
-                {
-                    itemText = post.Message;
-                    //f_ListBoxPosts.Items.Add(post.Message);
-                }
-                else if (post.Caption != null)
-                {
-                    itemText = post.Caption;
-                    //f_ListBoxPosts.Items.Add(post.Caption);
-                }
-                else
-                {
-                    itemText = string.Format("[{0}]", post.Type);
-                    //f_ListBoxPosts.Items.Add(string.Format("[{0}]", post.Type));
-                }
-
-                f_ListBoxPosts.Invoke(new Action(() => f_ListBoxPosts.Items.Add(itemText)));
+                new PostProxy() { Post = post };
+                f_ListBoxPosts.Invoke(new Action(() => f_ListBoxPosts.Items.Add(new PostProxy { Post = post })));
             }
 
             if (r_FBConnector.LoggedUser.Posts.Count == 0)
@@ -152,7 +137,14 @@ namespace Ex01.ApplicationUI
 
         private void onShowFriendsThreads()
         {
-            new FormFriendList(r_FBConnector.LoggedUser.Friends, f_LoadingCircleShowFriend).ShowDialog();
+            if (r_FBConnector.LoggedUser.Friends.Count == 0)
+            {
+                MessageBox.Show("No Friends to retrieve :(");
+            }
+            else
+            {
+                new FormFriendList(r_FBConnector.LoggedUser.Friends, f_LoadingCircleShowFriend).ShowDialog();
+            }
         }
 
         private void f_CheckinsButton_Click(object sender, EventArgs e)
@@ -164,25 +156,48 @@ namespace Ex01.ApplicationUI
 
         private void onShowCheckinsThread()
         {
-            new FormCheckinList(r_FBConnector.LoggedUser.Checkins, f_LoadingCircleShowCheckins).ShowDialog();
+            if (r_FBConnector.LoggedUser.Checkins.Count == 0)
+            {
+                MessageBox.Show("No Posts to retrieve :(");
+            }
+            else
+            {
+                new FormCheckinList(r_FBConnector.LoggedUser.Checkins, f_LoadingCircleShowCheckins).ShowDialog();
+            }
         }
-        private void fetchEvents()
+        private void onFetchEventsThread()
         {
-            f_ListBoxEvents.DisplayMember = "Name";
+            if (r_FBConnector.LoggedUser.Events.Count == 0)
+            {
+                MessageBox.Show("No Events to retrieve :(");
+            }
+            else
+            {
+                new FormEventsList(r_FBConnector.LoggedUser.Events, f_LoadingCircleShowEvents).ShowDialog();
+            }
+
+            //eventBindingSource.DataSource = r_FBConnector.LoggedUser.Events;
+            /*f_ListBoxEvents.DisplayMember = "Name";
             foreach (Event fbEvent in r_FBConnector.LoggedUser.Events)
             {
                 f_ListBoxEvents.Items.Add(fbEvent);
-            }
+            }*/
         }
 
-        private void buttonMostDiggingFriend_Click(object sender, EventArgs e)
+        private void onMostDiggingFriendThread()
         {
-            if (r_FBConnector.LoggedUser != null)
+            if (r_FBConnector.LoggedUser.Friends.Count == 0)
             {
+                MessageBox.Show("You Don't have any friends :(");
+            }
+            else
+            {
+                f_LoadingCircleShowMostDiggingFriend.Visible = true;
+                f_LoadingCircleShowMostDiggingFriend.Active = true;
                 DateTime lastYear = DateTime.Today.AddYears(-1);
                 User mostDiggingFriend = null;
                 int postCounter, maxNumOfPosts = 0;
-                
+
                 foreach (User friend in r_FBConnector.LoggedUser.Friends)
                 {
                     postCounter = 0;
@@ -201,13 +216,19 @@ namespace Ex01.ApplicationUI
                     }
                 }
 
-                new FormMosiftDiggingFriend(mostDiggingFriend, maxNumOfPosts).ShowDialog();
+                new FormMosiftDiggingFriend(mostDiggingFriend, maxNumOfPosts, f_LoadingCircleShowMostDiggingFriend).ShowDialog();
             }
-            else
-            {
-                MessageBox.Show("You must loggin first!");
-            }
+
         }
+
+        private void buttonMostDiggingFriend_Click(object sender, EventArgs e)
+        {
+            f_LoadingCircleShowMostDiggingFriend.Visible = true;
+            f_LoadingCircleShowMostDiggingFriend.Active = true;
+            new Thread(onMostDiggingFriendThread).Start();
+            
+        }
+
 
         private void f_Postbutton_Click(object sender, EventArgs e)
         {
@@ -232,43 +253,19 @@ namespace Ex01.ApplicationUI
                 }
             }
 
-           
+
         }
 
         private void buttonShowMyPost_Click(object sender, EventArgs e)
         {
-           
-
-            if (r_FBConnector.LoggedUser != null)
-            {
-                f_ListBoxPosts.Items.Clear();
-                new Thread(fetchPosts).Start() ;
-            }
-            else
-            {
-                MessageBox.Show("You must loggin first!");
-            }
-
-           
+            f_ListBoxPosts.Items.Clear();
+            new Thread(onFetchPostsThread).Start();
         }
-
         private void buttonShowMyEvents_Click(object sender, EventArgs e)
         {
-            
-            if (r_FBConnector.LoggedUser == null)
-            {
-                MessageBox.Show("You must loggin first!");
-            }
-            else if (r_FBConnector.LoggedUser.Events.Count == 0)
-            {
-                MessageBox.Show("No Events to retrieve :(");
-            }
-            else
-            {
-                fetchEvents();
-            }
-
-            
+            f_LoadingCircleShowEvents.Visible = true;
+            f_LoadingCircleShowEvents.Active = true;
+            new Thread(onFetchEventsThread).Start();
         }
 
         private void buttonShowMyLikes_Click(object sender, EventArgs e)
@@ -285,8 +282,14 @@ namespace Ex01.ApplicationUI
 
         private void onShowAlbumsThread()
         {
-            new FormAlbums(r_FBConnector.LoggedUser.Albums, f_LoadingCircleShowMyAlbums).ShowDialog();
-
+            if (r_FBConnector.LoggedUser.Albums.Count == 0)
+            {
+                MessageBox.Show("No Albums to retrieve :(");
+            }
+            else
+            {
+                new FormAlbums(r_FBConnector.LoggedUser.Albums, f_LoadingCircleShowMyAlbums).ShowDialog();
+            }
         }
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)

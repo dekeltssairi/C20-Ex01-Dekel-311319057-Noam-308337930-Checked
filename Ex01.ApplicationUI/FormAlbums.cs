@@ -14,12 +14,7 @@ namespace Ex01.ApplicationUI
         {
             r_Albums = i_Albums;
             m_LoadingCircleShowMyAlbums = i_LoadingCircleShowMyAlbums;
-            InitializeComponent();                      //desginer code
-            initializeComponent();                      //our code
-        }
-
-        private void initializeComponent()
-        {
+            InitializeComponent();                      
             albumBindingSource.DataSource = r_Albums;
         }
 
@@ -32,5 +27,6 @@ namespace Ex01.ApplicationUI
                 m_LoadingCircleShowMyAlbums.Enabled = false;
             }));
         }
+
     }
 }

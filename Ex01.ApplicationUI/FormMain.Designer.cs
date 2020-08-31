@@ -41,10 +41,14 @@
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.birthdayLabel1 = new System.Windows.Forms.Label();
             this.emailLabel1 = new System.Windows.Forms.Label();
-            this.imageNormalPictureBox = new System.Windows.Forms.PictureBox();
             this.nameLabel1 = new System.Windows.Forms.Label();
             this.f_ButtonLogin = new System.Windows.Forms.Button();
             this.f_CheckBoxRememberMe = new System.Windows.Forms.CheckBox();
+            this.f_LoadingCircleShowEvents = new MRG.Controls.UI.LoadingCircle();
+            this.f_LoadingCircleShowMyAlbums = new MRG.Controls.UI.LoadingCircle();
+            this.f_LoadingCircleShowMyLikes = new MRG.Controls.UI.LoadingCircle();
+            this.f_LoadingCircleShowCheckins = new MRG.Controls.UI.LoadingCircle();
+            this.f_LoadingCircleShowFriend = new MRG.Controls.UI.LoadingCircle();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.f_ButtonShowMyEvents = new System.Windows.Forms.Button();
@@ -52,7 +56,7 @@
             this.f_ButtonMyAlbums = new System.Windows.Forms.Button();
             this.f_ButtonShowLikes = new System.Windows.Forms.Button();
             this.f_ButtonShowMyPosts = new System.Windows.Forms.Button();
-            this.f_ListBoxEvents = new System.Windows.Forms.ListBox();
+            this.eventBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.f_ButtonLogout = new System.Windows.Forms.Button();
@@ -78,10 +82,8 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.userBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.f_LoadingCircleShowFriend = new MRG.Controls.UI.LoadingCircle();
-            this.f_LoadingCircleShowCheckins = new MRG.Controls.UI.LoadingCircle();
-            this.f_LoadingCircleShowMyLikes = new MRG.Controls.UI.LoadingCircle();
-            this.f_LoadingCircleShowMyAlbums = new MRG.Controls.UI.LoadingCircle();
+            this.f_LoadingCircleShowMostDiggingFriend = new MRG.Controls.UI.LoadingCircle();
+            this.imageLargePictureBox1 = new System.Windows.Forms.PictureBox();
             aboutLabel = new System.Windows.Forms.Label();
             birthdayLabel = new System.Windows.Forms.Label();
             emailLabel = new System.Windows.Forms.Label();
@@ -92,13 +94,14 @@
             this.splitContainer1.SuspendLayout();
             this.f_PanelProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageNormalPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eventBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingNavigator)).BeginInit();
             this.userBindingNavigator.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imageLargePictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // aboutLabel
@@ -158,6 +161,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.SteelBlue;
+            this.splitContainer1.Panel2.Controls.Add(this.f_LoadingCircleShowMostDiggingFriend);
+            this.splitContainer1.Panel2.Controls.Add(this.f_LoadingCircleShowEvents);
             this.splitContainer1.Panel2.Controls.Add(this.f_LoadingCircleShowMyAlbums);
             this.splitContainer1.Panel2.Controls.Add(this.f_LoadingCircleShowMyLikes);
             this.splitContainer1.Panel2.Controls.Add(this.f_LoadingCircleShowCheckins);
@@ -169,7 +174,6 @@
             this.splitContainer1.Panel2.Controls.Add(this.f_ButtonMyAlbums);
             this.splitContainer1.Panel2.Controls.Add(this.f_ButtonShowLikes);
             this.splitContainer1.Panel2.Controls.Add(this.f_ButtonShowMyPosts);
-            this.splitContainer1.Panel2.Controls.Add(this.f_ListBoxEvents);
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox3);
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox1);
             this.splitContainer1.Panel2.Controls.Add(this.f_ButtonLogout);
@@ -183,24 +187,24 @@
             this.splitContainer1.Panel2.Controls.Add(this.label1);
             this.splitContainer1.Panel2.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.splitContainer1.Size = new System.Drawing.Size(1392, 730);
-            this.splitContainer1.SplitterDistance = 281;
+            this.splitContainer1.SplitterDistance = 330;
             this.splitContainer1.TabIndex = 0;
             // 
             // f_PanelProfile
             // 
             this.f_PanelProfile.BackColor = System.Drawing.Color.CadetBlue;
+            this.f_PanelProfile.Controls.Add(this.imageLargePictureBox1);
             this.f_PanelProfile.Controls.Add(aboutLabel);
             this.f_PanelProfile.Controls.Add(this.aboutLabel1);
             this.f_PanelProfile.Controls.Add(birthdayLabel);
             this.f_PanelProfile.Controls.Add(this.birthdayLabel1);
             this.f_PanelProfile.Controls.Add(emailLabel);
             this.f_PanelProfile.Controls.Add(this.emailLabel1);
-            this.f_PanelProfile.Controls.Add(this.imageNormalPictureBox);
             this.f_PanelProfile.Controls.Add(nameLabel);
             this.f_PanelProfile.Controls.Add(this.nameLabel1);
             this.f_PanelProfile.Location = new System.Drawing.Point(3, 144);
             this.f_PanelProfile.Name = "f_PanelProfile";
-            this.f_PanelProfile.Size = new System.Drawing.Size(275, 583);
+            this.f_PanelProfile.Size = new System.Drawing.Size(325, 583);
             this.f_PanelProfile.TabIndex = 0;
             // 
             // aboutLabel1
@@ -237,15 +241,6 @@
             this.emailLabel1.Text = "label3";
             this.emailLabel1.Visible = false;
             // 
-            // imageNormalPictureBox
-            // 
-            this.imageNormalPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.userBindingSource, "ImageNormal", true));
-            this.imageNormalPictureBox.Location = new System.Drawing.Point(3, 3);
-            this.imageNormalPictureBox.Name = "imageNormalPictureBox";
-            this.imageNormalPictureBox.Size = new System.Drawing.Size(100, 71);
-            this.imageNormalPictureBox.TabIndex = 7;
-            this.imageNormalPictureBox.TabStop = false;
-            // 
             // nameLabel1
             // 
             this.nameLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Name", true));
@@ -278,6 +273,91 @@
             this.f_CheckBoxRememberMe.Text = "Remember me";
             this.f_CheckBoxRememberMe.UseVisualStyleBackColor = true;
             // 
+            // f_LoadingCircleShowEvents
+            // 
+            this.f_LoadingCircleShowEvents.Active = false;
+            this.f_LoadingCircleShowEvents.Color = System.Drawing.Color.DarkGray;
+            this.f_LoadingCircleShowEvents.InnerCircleRadius = 5;
+            this.f_LoadingCircleShowEvents.Location = new System.Drawing.Point(754, 448);
+            this.f_LoadingCircleShowEvents.Name = "f_LoadingCircleShowEvents";
+            this.f_LoadingCircleShowEvents.NumberSpoke = 12;
+            this.f_LoadingCircleShowEvents.OuterCircleRadius = 11;
+            this.f_LoadingCircleShowEvents.RotationSpeed = 100;
+            this.f_LoadingCircleShowEvents.Size = new System.Drawing.Size(75, 23);
+            this.f_LoadingCircleShowEvents.SpokeThickness = 2;
+            this.f_LoadingCircleShowEvents.StylePreset = MRG.Controls.UI.LoadingCircle.StylePresets.MacOSX;
+            this.f_LoadingCircleShowEvents.TabIndex = 105;
+            this.f_LoadingCircleShowEvents.Text = "loadingCircle1";
+            this.f_LoadingCircleShowEvents.Visible = false;
+            // 
+            // f_LoadingCircleShowMyAlbums
+            // 
+            this.f_LoadingCircleShowMyAlbums.Active = false;
+            this.f_LoadingCircleShowMyAlbums.Color = System.Drawing.Color.DarkGray;
+            this.f_LoadingCircleShowMyAlbums.InnerCircleRadius = 5;
+            this.f_LoadingCircleShowMyAlbums.Location = new System.Drawing.Point(754, 406);
+            this.f_LoadingCircleShowMyAlbums.Name = "f_LoadingCircleShowMyAlbums";
+            this.f_LoadingCircleShowMyAlbums.NumberSpoke = 12;
+            this.f_LoadingCircleShowMyAlbums.OuterCircleRadius = 11;
+            this.f_LoadingCircleShowMyAlbums.RotationSpeed = 100;
+            this.f_LoadingCircleShowMyAlbums.Size = new System.Drawing.Size(75, 23);
+            this.f_LoadingCircleShowMyAlbums.SpokeThickness = 2;
+            this.f_LoadingCircleShowMyAlbums.StylePreset = MRG.Controls.UI.LoadingCircle.StylePresets.MacOSX;
+            this.f_LoadingCircleShowMyAlbums.TabIndex = 104;
+            this.f_LoadingCircleShowMyAlbums.Text = "loadingCircle3";
+            this.f_LoadingCircleShowMyAlbums.Visible = false;
+            // 
+            // f_LoadingCircleShowMyLikes
+            // 
+            this.f_LoadingCircleShowMyLikes.Active = false;
+            this.f_LoadingCircleShowMyLikes.Color = System.Drawing.Color.DarkGray;
+            this.f_LoadingCircleShowMyLikes.InnerCircleRadius = 5;
+            this.f_LoadingCircleShowMyLikes.Location = new System.Drawing.Point(754, 348);
+            this.f_LoadingCircleShowMyLikes.Name = "f_LoadingCircleShowMyLikes";
+            this.f_LoadingCircleShowMyLikes.NumberSpoke = 12;
+            this.f_LoadingCircleShowMyLikes.OuterCircleRadius = 11;
+            this.f_LoadingCircleShowMyLikes.RotationSpeed = 100;
+            this.f_LoadingCircleShowMyLikes.Size = new System.Drawing.Size(75, 23);
+            this.f_LoadingCircleShowMyLikes.SpokeThickness = 2;
+            this.f_LoadingCircleShowMyLikes.StylePreset = MRG.Controls.UI.LoadingCircle.StylePresets.MacOSX;
+            this.f_LoadingCircleShowMyLikes.TabIndex = 103;
+            this.f_LoadingCircleShowMyLikes.Text = "loadingCircle2";
+            this.f_LoadingCircleShowMyLikes.Visible = false;
+            // 
+            // f_LoadingCircleShowCheckins
+            // 
+            this.f_LoadingCircleShowCheckins.Active = false;
+            this.f_LoadingCircleShowCheckins.Color = System.Drawing.Color.DarkGray;
+            this.f_LoadingCircleShowCheckins.InnerCircleRadius = 5;
+            this.f_LoadingCircleShowCheckins.Location = new System.Drawing.Point(754, 287);
+            this.f_LoadingCircleShowCheckins.Name = "f_LoadingCircleShowCheckins";
+            this.f_LoadingCircleShowCheckins.NumberSpoke = 12;
+            this.f_LoadingCircleShowCheckins.OuterCircleRadius = 11;
+            this.f_LoadingCircleShowCheckins.RotationSpeed = 100;
+            this.f_LoadingCircleShowCheckins.Size = new System.Drawing.Size(75, 23);
+            this.f_LoadingCircleShowCheckins.SpokeThickness = 2;
+            this.f_LoadingCircleShowCheckins.StylePreset = MRG.Controls.UI.LoadingCircle.StylePresets.MacOSX;
+            this.f_LoadingCircleShowCheckins.TabIndex = 102;
+            this.f_LoadingCircleShowCheckins.Text = "loadingCircle1";
+            this.f_LoadingCircleShowCheckins.Visible = false;
+            // 
+            // f_LoadingCircleShowFriend
+            // 
+            this.f_LoadingCircleShowFriend.Active = false;
+            this.f_LoadingCircleShowFriend.Color = System.Drawing.Color.DarkGray;
+            this.f_LoadingCircleShowFriend.InnerCircleRadius = 5;
+            this.f_LoadingCircleShowFriend.Location = new System.Drawing.Point(754, 226);
+            this.f_LoadingCircleShowFriend.Name = "f_LoadingCircleShowFriend";
+            this.f_LoadingCircleShowFriend.NumberSpoke = 12;
+            this.f_LoadingCircleShowFriend.OuterCircleRadius = 11;
+            this.f_LoadingCircleShowFriend.RotationSpeed = 100;
+            this.f_LoadingCircleShowFriend.Size = new System.Drawing.Size(75, 23);
+            this.f_LoadingCircleShowFriend.SpokeThickness = 2;
+            this.f_LoadingCircleShowFriend.StylePreset = MRG.Controls.UI.LoadingCircle.StylePresets.MacOSX;
+            this.f_LoadingCircleShowFriend.TabIndex = 101;
+            this.f_LoadingCircleShowFriend.Text = "loadingCircle1";
+            this.f_LoadingCircleShowFriend.Visible = false;
+            // 
             // pictureBox4
             // 
             this.pictureBox4.Image = global::Ex01.ApplicationUI.Properties.Resources.Artboard_1_copy_5_2x_220x120;
@@ -301,11 +381,11 @@
             // 
             this.f_ButtonShowMyEvents.Enabled = false;
             this.f_ButtonShowMyEvents.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.f_ButtonShowMyEvents.Location = new System.Drawing.Point(277, 448);
+            this.f_ButtonShowMyEvents.Location = new System.Drawing.Point(835, 448);
             this.f_ButtonShowMyEvents.Name = "f_ButtonShowMyEvents";
-            this.f_ButtonShowMyEvents.Size = new System.Drawing.Size(253, 23);
+            this.f_ButtonShowMyEvents.Size = new System.Drawing.Size(196, 23);
             this.f_ButtonShowMyEvents.TabIndex = 92;
-            this.f_ButtonShowMyEvents.Text = "Show My Events!";
+            this.f_ButtonShowMyEvents.Text = "Show Events";
             this.f_ButtonShowMyEvents.UseVisualStyleBackColor = true;
             this.f_ButtonShowMyEvents.Click += new System.EventHandler(this.buttonShowMyEvents_Click);
             // 
@@ -322,7 +402,7 @@
             // 
             this.f_ButtonMyAlbums.Enabled = false;
             this.f_ButtonMyAlbums.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.f_ButtonMyAlbums.Location = new System.Drawing.Point(835, 438);
+            this.f_ButtonMyAlbums.Location = new System.Drawing.Point(835, 406);
             this.f_ButtonMyAlbums.Name = "f_ButtonMyAlbums";
             this.f_ButtonMyAlbums.Size = new System.Drawing.Size(196, 23);
             this.f_ButtonMyAlbums.TabIndex = 94;
@@ -334,7 +414,7 @@
             // 
             this.f_ButtonShowLikes.Enabled = false;
             this.f_ButtonShowLikes.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.f_ButtonShowLikes.Location = new System.Drawing.Point(835, 377);
+            this.f_ButtonShowLikes.Location = new System.Drawing.Point(835, 348);
             this.f_ButtonShowLikes.Name = "f_ButtonShowLikes";
             this.f_ButtonShowLikes.Size = new System.Drawing.Size(196, 23);
             this.f_ButtonShowLikes.TabIndex = 98;
@@ -346,7 +426,7 @@
             // 
             this.f_ButtonShowMyPosts.Enabled = false;
             this.f_ButtonShowMyPosts.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.f_ButtonShowMyPosts.Location = new System.Drawing.Point(21, 448);
+            this.f_ButtonShowMyPosts.Location = new System.Drawing.Point(50, 485);
             this.f_ButtonShowMyPosts.Name = "f_ButtonShowMyPosts";
             this.f_ButtonShowMyPosts.Size = new System.Drawing.Size(253, 23);
             this.f_ButtonShowMyPosts.TabIndex = 91;
@@ -354,19 +434,14 @@
             this.f_ButtonShowMyPosts.UseVisualStyleBackColor = true;
             this.f_ButtonShowMyPosts.Click += new System.EventHandler(this.buttonShowMyPost_Click);
             // 
-            // f_ListBoxEvents
+            // eventBindingSource
             // 
-            this.f_ListBoxEvents.FormattingEnabled = true;
-            this.f_ListBoxEvents.ItemHeight = 16;
-            this.f_ListBoxEvents.Location = new System.Drawing.Point(280, 494);
-            this.f_ListBoxEvents.Name = "f_ListBoxEvents";
-            this.f_ListBoxEvents.Size = new System.Drawing.Size(250, 116);
-            this.f_ListBoxEvents.TabIndex = 89;
+            this.eventBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Event);
             // 
             // pictureBox3
             // 
             this.pictureBox3.Image = global::Ex01.ApplicationUI.Properties.Resources.logout;
-            this.pictureBox3.Location = new System.Drawing.Point(1039, 61);
+            this.pictureBox3.Location = new System.Drawing.Point(996, 44);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(35, 35);
             this.pictureBox3.TabIndex = 96;
@@ -375,9 +450,9 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Ex01.ApplicationUI.Properties.Resources.facebook_logo1;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 30);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(879, 198);
+            this.pictureBox1.Size = new System.Drawing.Size(879, 190);
             this.pictureBox1.TabIndex = 95;
             this.pictureBox1.TabStop = false;
             // 
@@ -385,7 +460,7 @@
             // 
             this.f_ButtonLogout.Enabled = false;
             this.f_ButtonLogout.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.f_ButtonLogout.Location = new System.Drawing.Point(899, 61);
+            this.f_ButtonLogout.Location = new System.Drawing.Point(888, 44);
             this.f_ButtonLogout.Name = "f_ButtonLogout";
             this.f_ButtonLogout.Size = new System.Drawing.Size(102, 35);
             this.f_ButtonLogout.TabIndex = 90;
@@ -398,14 +473,14 @@
             this.f_ListBoxPosts.FormattingEnabled = true;
             this.f_ListBoxPosts.HorizontalScrollbar = true;
             this.f_ListBoxPosts.ItemHeight = 16;
-            this.f_ListBoxPosts.Location = new System.Drawing.Point(19, 494);
+            this.f_ListBoxPosts.Location = new System.Drawing.Point(48, 547);
             this.f_ListBoxPosts.Name = "f_ListBoxPosts";
             this.f_ListBoxPosts.Size = new System.Drawing.Size(255, 116);
             this.f_ListBoxPosts.TabIndex = 88;
             // 
             // f_lastPostStaus
             // 
-            this.f_lastPostStaus.Location = new System.Drawing.Point(21, 237);
+            this.f_lastPostStaus.Location = new System.Drawing.Point(50, 226);
             this.f_lastPostStaus.Multiline = true;
             this.f_lastPostStaus.Name = "f_lastPostStaus";
             this.f_lastPostStaus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -441,7 +516,7 @@
             this.f_ButtonShowChekins.CausesValidation = false;
             this.f_ButtonShowChekins.Enabled = false;
             this.f_ButtonShowChekins.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.f_ButtonShowChekins.Location = new System.Drawing.Point(835, 310);
+            this.f_ButtonShowChekins.Location = new System.Drawing.Point(835, 284);
             this.f_ButtonShowChekins.Name = "f_ButtonShowChekins";
             this.f_ButtonShowChekins.Size = new System.Drawing.Size(196, 23);
             this.f_ButtonShowChekins.TabIndex = 88;
@@ -453,7 +528,7 @@
             // 
             this.f_ButtonShowFriends.Enabled = false;
             this.f_ButtonShowFriends.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.f_ButtonShowFriends.Location = new System.Drawing.Point(835, 240);
+            this.f_ButtonShowFriends.Location = new System.Drawing.Point(835, 226);
             this.f_ButtonShowFriends.Name = "f_ButtonShowFriends";
             this.f_ButtonShowFriends.Size = new System.Drawing.Size(196, 23);
             this.f_ButtonShowFriends.TabIndex = 87;
@@ -465,7 +540,7 @@
             // 
             this.f_ButtonPost.Enabled = false;
             this.f_ButtonPost.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.f_ButtonPost.Location = new System.Drawing.Point(455, 412);
+            this.f_ButtonPost.Location = new System.Drawing.Point(484, 406);
             this.f_ButtonPost.Name = "f_ButtonPost";
             this.f_ButtonPost.Size = new System.Drawing.Size(75, 23);
             this.f_ButtonPost.TabIndex = 86;
@@ -476,7 +551,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(365, 412);
+            this.label1.Location = new System.Drawing.Point(394, 409);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(84, 17);
             this.label1.TabIndex = 85;
@@ -509,7 +584,7 @@
             this.userBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.userBindingNavigator.Name = "userBindingNavigator";
             this.userBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.userBindingNavigator.Size = new System.Drawing.Size(1392, 31);
+            this.userBindingNavigator.Size = new System.Drawing.Size(1392, 27);
             this.userBindingNavigator.TabIndex = 1;
             this.userBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -519,13 +594,13 @@
             this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
             this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 24);
             this.bindingNavigatorAddNewItem.Text = "Add new";
             // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(45, 28);
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(45, 24);
             this.bindingNavigatorCountItem.Text = "of {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
             // 
@@ -535,7 +610,7 @@
             this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
             this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
             this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 24);
             this.bindingNavigatorDeleteItem.Text = "Delete";
             // 
             // bindingNavigatorMoveFirstItem
@@ -544,7 +619,7 @@
             this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
             this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
             this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(29, 24);
             this.bindingNavigatorMoveFirstItem.Text = "Move first";
             // 
             // bindingNavigatorMovePreviousItem
@@ -553,13 +628,13 @@
             this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
             this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
             this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(29, 24);
             this.bindingNavigatorMovePreviousItem.Text = "Move previous";
             // 
             // bindingNavigatorSeparator
             // 
             this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 31);
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 27);
             // 
             // bindingNavigatorPositionItem
             // 
@@ -574,7 +649,7 @@
             // bindingNavigatorSeparator1
             // 
             this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 31);
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
             // bindingNavigatorMoveNextItem
             // 
@@ -582,7 +657,7 @@
             this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
             this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
             this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(29, 24);
             this.bindingNavigatorMoveNextItem.Text = "Move next";
             // 
             // bindingNavigatorMoveLastItem
@@ -591,13 +666,13 @@
             this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
             this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
             this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(29, 24);
             this.bindingNavigatorMoveLastItem.Text = "Move last";
             // 
             // bindingNavigatorSeparator2
             // 
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 31);
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 27);
             // 
             // userBindingNavigatorSaveItem
             // 
@@ -605,7 +680,7 @@
             this.userBindingNavigatorSaveItem.Enabled = false;
             this.userBindingNavigatorSaveItem.Image = ((System.Drawing.Image)(resources.GetObject("userBindingNavigatorSaveItem.Image")));
             this.userBindingNavigatorSaveItem.Name = "userBindingNavigatorSaveItem";
-            this.userBindingNavigatorSaveItem.Size = new System.Drawing.Size(29, 28);
+            this.userBindingNavigatorSaveItem.Size = new System.Drawing.Size(29, 24);
             this.userBindingNavigatorSaveItem.Text = "Save Data";
             // 
             // backgroundWorker1
@@ -613,73 +688,31 @@
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // f_LoadingCircleShowFriend
+            // f_LoadingCircleShowMostDiggingFriend
             // 
-            this.f_LoadingCircleShowFriend.Active = false;
-            this.f_LoadingCircleShowFriend.Color = System.Drawing.Color.DarkGray;
-            this.f_LoadingCircleShowFriend.InnerCircleRadius = 8;
-            this.f_LoadingCircleShowFriend.Location = new System.Drawing.Point(754, 240);
-            this.f_LoadingCircleShowFriend.Name = "f_LoadingCircleShowFriend";
-            this.f_LoadingCircleShowFriend.NumberSpoke = 10;
-            this.f_LoadingCircleShowFriend.OuterCircleRadius = 10;
-            this.f_LoadingCircleShowFriend.RotationSpeed = 100;
-            this.f_LoadingCircleShowFriend.Size = new System.Drawing.Size(75, 23);
-            this.f_LoadingCircleShowFriend.SpokeThickness = 4;
-            this.f_LoadingCircleShowFriend.StylePreset = MRG.Controls.UI.LoadingCircle.StylePresets.MacOSX;
-            this.f_LoadingCircleShowFriend.TabIndex = 101;
-            this.f_LoadingCircleShowFriend.Text = "loadingCircle1";
-            this.f_LoadingCircleShowFriend.Visible = false;
+            this.f_LoadingCircleShowMostDiggingFriend.Active = false;
+            this.f_LoadingCircleShowMostDiggingFriend.Color = System.Drawing.Color.DarkGray;
+            this.f_LoadingCircleShowMostDiggingFriend.InnerCircleRadius = 8;
+            this.f_LoadingCircleShowMostDiggingFriend.Location = new System.Drawing.Point(466, 548);
+            this.f_LoadingCircleShowMostDiggingFriend.Name = "f_LoadingCircleShowMostDiggingFriend";
+            this.f_LoadingCircleShowMostDiggingFriend.NumberSpoke = 10;
+            this.f_LoadingCircleShowMostDiggingFriend.OuterCircleRadius = 10;
+            this.f_LoadingCircleShowMostDiggingFriend.RotationSpeed = 100;
+            this.f_LoadingCircleShowMostDiggingFriend.Size = new System.Drawing.Size(80, 35);
+            this.f_LoadingCircleShowMostDiggingFriend.SpokeThickness = 4;
+            this.f_LoadingCircleShowMostDiggingFriend.StylePreset = MRG.Controls.UI.LoadingCircle.StylePresets.MacOSX;
+            this.f_LoadingCircleShowMostDiggingFriend.TabIndex = 106;
+            this.f_LoadingCircleShowMostDiggingFriend.Text = "loadingCircle1";
+            this.f_LoadingCircleShowMostDiggingFriend.Visible = false;
             // 
-            // f_LoadingCircleShowCheckins
+            // imageLargePictureBox1
             // 
-            this.f_LoadingCircleShowCheckins.Active = false;
-            this.f_LoadingCircleShowCheckins.Color = System.Drawing.Color.DarkGray;
-            this.f_LoadingCircleShowCheckins.InnerCircleRadius = 8;
-            this.f_LoadingCircleShowCheckins.Location = new System.Drawing.Point(754, 310);
-            this.f_LoadingCircleShowCheckins.Name = "f_LoadingCircleShowCheckins";
-            this.f_LoadingCircleShowCheckins.NumberSpoke = 10;
-            this.f_LoadingCircleShowCheckins.OuterCircleRadius = 10;
-            this.f_LoadingCircleShowCheckins.RotationSpeed = 100;
-            this.f_LoadingCircleShowCheckins.Size = new System.Drawing.Size(75, 23);
-            this.f_LoadingCircleShowCheckins.SpokeThickness = 4;
-            this.f_LoadingCircleShowCheckins.StylePreset = MRG.Controls.UI.LoadingCircle.StylePresets.MacOSX;
-            this.f_LoadingCircleShowCheckins.TabIndex = 102;
-            this.f_LoadingCircleShowCheckins.Text = "loadingCircle1";
-            this.f_LoadingCircleShowCheckins.Visible = false;
-            // 
-            // f_LoadingCircleShowMyLikes
-            // 
-            this.f_LoadingCircleShowMyLikes.Active = false;
-            this.f_LoadingCircleShowMyLikes.Color = System.Drawing.Color.DarkGray;
-            this.f_LoadingCircleShowMyLikes.InnerCircleRadius = 8;
-            this.f_LoadingCircleShowMyLikes.Location = new System.Drawing.Point(754, 377);
-            this.f_LoadingCircleShowMyLikes.Name = "f_LoadingCircleShowMyLikes";
-            this.f_LoadingCircleShowMyLikes.NumberSpoke = 10;
-            this.f_LoadingCircleShowMyLikes.OuterCircleRadius = 10;
-            this.f_LoadingCircleShowMyLikes.RotationSpeed = 100;
-            this.f_LoadingCircleShowMyLikes.Size = new System.Drawing.Size(75, 23);
-            this.f_LoadingCircleShowMyLikes.SpokeThickness = 4;
-            this.f_LoadingCircleShowMyLikes.StylePreset = MRG.Controls.UI.LoadingCircle.StylePresets.MacOSX;
-            this.f_LoadingCircleShowMyLikes.TabIndex = 103;
-            this.f_LoadingCircleShowMyLikes.Text = "loadingCircle2";
-            this.f_LoadingCircleShowMyLikes.Visible = false;
-            // 
-            // f_LoadingCircleShowMyAlbums
-            // 
-            this.f_LoadingCircleShowMyAlbums.Active = false;
-            this.f_LoadingCircleShowMyAlbums.Color = System.Drawing.Color.DarkGray;
-            this.f_LoadingCircleShowMyAlbums.InnerCircleRadius = 8;
-            this.f_LoadingCircleShowMyAlbums.Location = new System.Drawing.Point(754, 437);
-            this.f_LoadingCircleShowMyAlbums.Name = "f_LoadingCircleShowMyAlbums";
-            this.f_LoadingCircleShowMyAlbums.NumberSpoke = 10;
-            this.f_LoadingCircleShowMyAlbums.OuterCircleRadius = 10;
-            this.f_LoadingCircleShowMyAlbums.RotationSpeed = 100;
-            this.f_LoadingCircleShowMyAlbums.Size = new System.Drawing.Size(75, 23);
-            this.f_LoadingCircleShowMyAlbums.SpokeThickness = 4;
-            this.f_LoadingCircleShowMyAlbums.StylePreset = MRG.Controls.UI.LoadingCircle.StylePresets.MacOSX;
-            this.f_LoadingCircleShowMyAlbums.TabIndex = 104;
-            this.f_LoadingCircleShowMyAlbums.Text = "loadingCircle3";
-            this.f_LoadingCircleShowMyAlbums.Visible = false;
+            this.imageLargePictureBox1.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.userBindingSource, "ImageLarge", true));
+            this.imageLargePictureBox1.Location = new System.Drawing.Point(12, 234);
+            this.imageLargePictureBox1.Name = "imageLargePictureBox1";
+            this.imageLargePictureBox1.Size = new System.Drawing.Size(284, 258);
+            this.imageLargePictureBox1.TabIndex = 11;
+            this.imageLargePictureBox1.TabStop = false;
             // 
             // FormMain
             // 
@@ -701,14 +734,15 @@
             this.f_PanelProfile.ResumeLayout(false);
             this.f_PanelProfile.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageNormalPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eventBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingNavigator)).EndInit();
             this.userBindingNavigator.ResumeLayout(false);
             this.userBindingNavigator.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imageLargePictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -720,7 +754,6 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button f_ButtonShowMyEvents;
         private System.Windows.Forms.Button f_ButtonShowMyPosts;
-        private System.Windows.Forms.ListBox f_ListBoxEvents;
         private System.Windows.Forms.ListBox f_ListBoxPosts;
         private System.Windows.Forms.Button f_ButtonLogin;
         private System.Windows.Forms.CheckBox f_CheckBoxRememberMe;
@@ -743,7 +776,6 @@
         private System.Windows.Forms.BindingSource userBindingSource;
         private System.Windows.Forms.Label birthdayLabel1;
         private System.Windows.Forms.Label emailLabel1;
-        private System.Windows.Forms.PictureBox imageNormalPictureBox;
         private System.Windows.Forms.Label nameLabel1;
         private System.Windows.Forms.BindingNavigator userBindingNavigator;
         private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
@@ -763,5 +795,9 @@
         private MRG.Controls.UI.LoadingCircle f_LoadingCircleShowMyAlbums;
         private MRG.Controls.UI.LoadingCircle f_LoadingCircleShowMyLikes;
         private MRG.Controls.UI.LoadingCircle f_LoadingCircleShowCheckins;
+        private System.Windows.Forms.BindingSource eventBindingSource;
+        private MRG.Controls.UI.LoadingCircle f_LoadingCircleShowEvents;
+        private MRG.Controls.UI.LoadingCircle f_LoadingCircleShowMostDiggingFriend;
+        private System.Windows.Forms.PictureBox imageLargePictureBox1;
     }
 }
