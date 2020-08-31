@@ -98,6 +98,9 @@
       <HintPath>..\..\C20 Ex01 Dekel 311319057 Noam 308337930\Ex01.ApplicationEngine\bin\Debug\FbGraphApiWrapper.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MRG.Controls.UI">
+      <HintPath>..\MRG.Controls.UI\bin\Debug\MRG.Controls.UI.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />

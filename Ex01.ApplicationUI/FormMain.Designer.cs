@@ -40,7 +40,6 @@
             this.aboutLabel1 = new System.Windows.Forms.Label();
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.birthdayLabel1 = new System.Windows.Forms.Label();
-            this.f_ButtonMyAlbums = new System.Windows.Forms.Button();
             this.emailLabel1 = new System.Windows.Forms.Label();
             this.imageNormalPictureBox = new System.Windows.Forms.PictureBox();
             this.nameLabel1 = new System.Windows.Forms.Label();
@@ -50,16 +49,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.f_ButtonShowMyEvents = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.f_ButtonMyAlbums = new System.Windows.Forms.Button();
             this.f_ButtonShowLikes = new System.Windows.Forms.Button();
             this.f_ButtonShowMyPosts = new System.Windows.Forms.Button();
             this.f_ListBoxEvents = new System.Windows.Forms.ListBox();
-            this.f_LabelPleaseWait = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.f_ButtonLogout = new System.Windows.Forms.Button();
             this.f_ListBoxPosts = new System.Windows.Forms.ListBox();
             this.f_lastPostStaus = new System.Windows.Forms.TextBox();
             this.f_ButtonShowMostDiggingFriend = new System.Windows.Forms.Button();
-            this.f_ButtonLogout = new System.Windows.Forms.Button();
             this.f_ButtonCovid19 = new System.Windows.Forms.Button();
             this.f_ButtonShowChekins = new System.Windows.Forms.Button();
             this.f_ButtonShowFriends = new System.Windows.Forms.Button();
@@ -78,6 +77,11 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.userBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.f_LoadingCircleShowFriend = new MRG.Controls.UI.LoadingCircle();
+            this.f_LoadingCircleShowCheckins = new MRG.Controls.UI.LoadingCircle();
+            this.f_LoadingCircleShowMyLikes = new MRG.Controls.UI.LoadingCircle();
+            this.f_LoadingCircleShowMyAlbums = new MRG.Controls.UI.LoadingCircle();
             aboutLabel = new System.Windows.Forms.Label();
             birthdayLabel = new System.Windows.Forms.Label();
             emailLabel = new System.Windows.Forms.Label();
@@ -154,6 +158,10 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.SteelBlue;
+            this.splitContainer1.Panel2.Controls.Add(this.f_LoadingCircleShowMyAlbums);
+            this.splitContainer1.Panel2.Controls.Add(this.f_LoadingCircleShowMyLikes);
+            this.splitContainer1.Panel2.Controls.Add(this.f_LoadingCircleShowCheckins);
+            this.splitContainer1.Panel2.Controls.Add(this.f_LoadingCircleShowFriend);
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox4);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Panel2.Controls.Add(this.f_ButtonShowMyEvents);
@@ -162,7 +170,6 @@
             this.splitContainer1.Panel2.Controls.Add(this.f_ButtonShowLikes);
             this.splitContainer1.Panel2.Controls.Add(this.f_ButtonShowMyPosts);
             this.splitContainer1.Panel2.Controls.Add(this.f_ListBoxEvents);
-            this.splitContainer1.Panel2.Controls.Add(this.f_LabelPleaseWait);
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox3);
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox1);
             this.splitContainer1.Panel2.Controls.Add(this.f_ButtonLogout);
@@ -219,18 +226,6 @@
             this.birthdayLabel1.TabIndex = 3;
             this.birthdayLabel1.Text = "label3";
             this.birthdayLabel1.Visible = false;
-            // 
-            // f_ButtonMyAlbums
-            // 
-            this.f_ButtonMyAlbums.Enabled = false;
-            this.f_ButtonMyAlbums.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.f_ButtonMyAlbums.Location = new System.Drawing.Point(835, 438);
-            this.f_ButtonMyAlbums.Name = "f_ButtonMyAlbums";
-            this.f_ButtonMyAlbums.Size = new System.Drawing.Size(196, 23);
-            this.f_ButtonMyAlbums.TabIndex = 94;
-            this.f_ButtonMyAlbums.Text = "My Albums";
-            this.f_ButtonMyAlbums.UseVisualStyleBackColor = true;
-            this.f_ButtonMyAlbums.Click += new System.EventHandler(this.buttonMyAlbums_Click);
             // 
             // emailLabel1
             // 
@@ -323,6 +318,18 @@
             this.pictureBox2.TabIndex = 93;
             this.pictureBox2.TabStop = false;
             // 
+            // f_ButtonMyAlbums
+            // 
+            this.f_ButtonMyAlbums.Enabled = false;
+            this.f_ButtonMyAlbums.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.f_ButtonMyAlbums.Location = new System.Drawing.Point(835, 438);
+            this.f_ButtonMyAlbums.Name = "f_ButtonMyAlbums";
+            this.f_ButtonMyAlbums.Size = new System.Drawing.Size(196, 23);
+            this.f_ButtonMyAlbums.TabIndex = 94;
+            this.f_ButtonMyAlbums.Text = "My Albums";
+            this.f_ButtonMyAlbums.UseVisualStyleBackColor = true;
+            this.f_ButtonMyAlbums.Click += new System.EventHandler(this.buttonMyAlbums_Click);
+            // 
             // f_ButtonShowLikes
             // 
             this.f_ButtonShowLikes.Enabled = false;
@@ -356,17 +363,6 @@
             this.f_ListBoxEvents.Size = new System.Drawing.Size(250, 116);
             this.f_ListBoxEvents.TabIndex = 89;
             // 
-            // f_LabelPleaseWait
-            // 
-            this.f_LabelPleaseWait.AutoSize = true;
-            this.f_LabelPleaseWait.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.f_LabelPleaseWait.Location = new System.Drawing.Point(136, 651);
-            this.f_LabelPleaseWait.Name = "f_LabelPleaseWait";
-            this.f_LabelPleaseWait.Size = new System.Drawing.Size(257, 46);
-            this.f_LabelPleaseWait.TabIndex = 97;
-            this.f_LabelPleaseWait.Text = "Please wait...";
-            this.f_LabelPleaseWait.Visible = false;
-            // 
             // pictureBox3
             // 
             this.pictureBox3.Image = global::Ex01.ApplicationUI.Properties.Resources.logout;
@@ -384,6 +380,18 @@
             this.pictureBox1.Size = new System.Drawing.Size(879, 198);
             this.pictureBox1.TabIndex = 95;
             this.pictureBox1.TabStop = false;
+            // 
+            // f_ButtonLogout
+            // 
+            this.f_ButtonLogout.Enabled = false;
+            this.f_ButtonLogout.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.f_ButtonLogout.Location = new System.Drawing.Point(899, 61);
+            this.f_ButtonLogout.Name = "f_ButtonLogout";
+            this.f_ButtonLogout.Size = new System.Drawing.Size(102, 35);
+            this.f_ButtonLogout.TabIndex = 90;
+            this.f_ButtonLogout.Text = "Logout";
+            this.f_ButtonLogout.UseVisualStyleBackColor = true;
+            this.f_ButtonLogout.Click += new System.EventHandler(this.buttonLogout_Click);
             // 
             // f_ListBoxPosts
             // 
@@ -415,18 +423,6 @@
             this.f_ButtonShowMostDiggingFriend.Text = "Show Most digging friend";
             this.f_ButtonShowMostDiggingFriend.UseVisualStyleBackColor = true;
             this.f_ButtonShowMostDiggingFriend.Click += new System.EventHandler(this.buttonMostDiggingFriend_Click);
-            // 
-            // f_ButtonLogout
-            // 
-            this.f_ButtonLogout.Enabled = false;
-            this.f_ButtonLogout.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.f_ButtonLogout.Location = new System.Drawing.Point(899, 61);
-            this.f_ButtonLogout.Name = "f_ButtonLogout";
-            this.f_ButtonLogout.Size = new System.Drawing.Size(102, 35);
-            this.f_ButtonLogout.TabIndex = 90;
-            this.f_ButtonLogout.Text = "Logout";
-            this.f_ButtonLogout.UseVisualStyleBackColor = true;
-            this.f_ButtonLogout.Click += new System.EventHandler(this.buttonLogout_Click);
             // 
             // f_ButtonCovid19
             // 
@@ -513,7 +509,7 @@
             this.userBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.userBindingNavigator.Name = "userBindingNavigator";
             this.userBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.userBindingNavigator.Size = new System.Drawing.Size(1392, 27);
+            this.userBindingNavigator.Size = new System.Drawing.Size(1392, 31);
             this.userBindingNavigator.TabIndex = 1;
             this.userBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -523,13 +519,13 @@
             this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
             this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorAddNewItem.Text = "Add new";
             // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(45, 24);
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(45, 28);
             this.bindingNavigatorCountItem.Text = "of {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
             // 
@@ -539,7 +535,7 @@
             this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
             this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
             this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorDeleteItem.Text = "Delete";
             // 
             // bindingNavigatorMoveFirstItem
@@ -548,7 +544,7 @@
             this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
             this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
             this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorMoveFirstItem.Text = "Move first";
             // 
             // bindingNavigatorMovePreviousItem
@@ -557,18 +553,19 @@
             this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
             this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
             this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorMovePreviousItem.Text = "Move previous";
             // 
             // bindingNavigatorSeparator
             // 
             this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 27);
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 31);
             // 
             // bindingNavigatorPositionItem
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "Position";
             this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 27);
             this.bindingNavigatorPositionItem.Text = "0";
@@ -577,7 +574,7 @@
             // bindingNavigatorSeparator1
             // 
             this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 27);
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 31);
             // 
             // bindingNavigatorMoveNextItem
             // 
@@ -585,7 +582,7 @@
             this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
             this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
             this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorMoveNextItem.Text = "Move next";
             // 
             // bindingNavigatorMoveLastItem
@@ -594,13 +591,13 @@
             this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
             this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
             this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorMoveLastItem.Text = "Move last";
             // 
             // bindingNavigatorSeparator2
             // 
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 27);
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 31);
             // 
             // userBindingNavigatorSaveItem
             // 
@@ -608,8 +605,81 @@
             this.userBindingNavigatorSaveItem.Enabled = false;
             this.userBindingNavigatorSaveItem.Image = ((System.Drawing.Image)(resources.GetObject("userBindingNavigatorSaveItem.Image")));
             this.userBindingNavigatorSaveItem.Name = "userBindingNavigatorSaveItem";
-            this.userBindingNavigatorSaveItem.Size = new System.Drawing.Size(29, 24);
+            this.userBindingNavigatorSaveItem.Size = new System.Drawing.Size(29, 28);
             this.userBindingNavigatorSaveItem.Text = "Save Data";
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
+            // f_LoadingCircleShowFriend
+            // 
+            this.f_LoadingCircleShowFriend.Active = false;
+            this.f_LoadingCircleShowFriend.Color = System.Drawing.Color.DarkGray;
+            this.f_LoadingCircleShowFriend.InnerCircleRadius = 8;
+            this.f_LoadingCircleShowFriend.Location = new System.Drawing.Point(754, 240);
+            this.f_LoadingCircleShowFriend.Name = "f_LoadingCircleShowFriend";
+            this.f_LoadingCircleShowFriend.NumberSpoke = 10;
+            this.f_LoadingCircleShowFriend.OuterCircleRadius = 10;
+            this.f_LoadingCircleShowFriend.RotationSpeed = 100;
+            this.f_LoadingCircleShowFriend.Size = new System.Drawing.Size(75, 23);
+            this.f_LoadingCircleShowFriend.SpokeThickness = 4;
+            this.f_LoadingCircleShowFriend.StylePreset = MRG.Controls.UI.LoadingCircle.StylePresets.MacOSX;
+            this.f_LoadingCircleShowFriend.TabIndex = 101;
+            this.f_LoadingCircleShowFriend.Text = "loadingCircle1";
+            this.f_LoadingCircleShowFriend.Visible = false;
+            // 
+            // f_LoadingCircleShowCheckins
+            // 
+            this.f_LoadingCircleShowCheckins.Active = false;
+            this.f_LoadingCircleShowCheckins.Color = System.Drawing.Color.DarkGray;
+            this.f_LoadingCircleShowCheckins.InnerCircleRadius = 8;
+            this.f_LoadingCircleShowCheckins.Location = new System.Drawing.Point(754, 310);
+            this.f_LoadingCircleShowCheckins.Name = "f_LoadingCircleShowCheckins";
+            this.f_LoadingCircleShowCheckins.NumberSpoke = 10;
+            this.f_LoadingCircleShowCheckins.OuterCircleRadius = 10;
+            this.f_LoadingCircleShowCheckins.RotationSpeed = 100;
+            this.f_LoadingCircleShowCheckins.Size = new System.Drawing.Size(75, 23);
+            this.f_LoadingCircleShowCheckins.SpokeThickness = 4;
+            this.f_LoadingCircleShowCheckins.StylePreset = MRG.Controls.UI.LoadingCircle.StylePresets.MacOSX;
+            this.f_LoadingCircleShowCheckins.TabIndex = 102;
+            this.f_LoadingCircleShowCheckins.Text = "loadingCircle1";
+            this.f_LoadingCircleShowCheckins.Visible = false;
+            // 
+            // f_LoadingCircleShowMyLikes
+            // 
+            this.f_LoadingCircleShowMyLikes.Active = false;
+            this.f_LoadingCircleShowMyLikes.Color = System.Drawing.Color.DarkGray;
+            this.f_LoadingCircleShowMyLikes.InnerCircleRadius = 8;
+            this.f_LoadingCircleShowMyLikes.Location = new System.Drawing.Point(754, 377);
+            this.f_LoadingCircleShowMyLikes.Name = "f_LoadingCircleShowMyLikes";
+            this.f_LoadingCircleShowMyLikes.NumberSpoke = 10;
+            this.f_LoadingCircleShowMyLikes.OuterCircleRadius = 10;
+            this.f_LoadingCircleShowMyLikes.RotationSpeed = 100;
+            this.f_LoadingCircleShowMyLikes.Size = new System.Drawing.Size(75, 23);
+            this.f_LoadingCircleShowMyLikes.SpokeThickness = 4;
+            this.f_LoadingCircleShowMyLikes.StylePreset = MRG.Controls.UI.LoadingCircle.StylePresets.MacOSX;
+            this.f_LoadingCircleShowMyLikes.TabIndex = 103;
+            this.f_LoadingCircleShowMyLikes.Text = "loadingCircle2";
+            this.f_LoadingCircleShowMyLikes.Visible = false;
+            // 
+            // f_LoadingCircleShowMyAlbums
+            // 
+            this.f_LoadingCircleShowMyAlbums.Active = false;
+            this.f_LoadingCircleShowMyAlbums.Color = System.Drawing.Color.DarkGray;
+            this.f_LoadingCircleShowMyAlbums.InnerCircleRadius = 8;
+            this.f_LoadingCircleShowMyAlbums.Location = new System.Drawing.Point(754, 437);
+            this.f_LoadingCircleShowMyAlbums.Name = "f_LoadingCircleShowMyAlbums";
+            this.f_LoadingCircleShowMyAlbums.NumberSpoke = 10;
+            this.f_LoadingCircleShowMyAlbums.OuterCircleRadius = 10;
+            this.f_LoadingCircleShowMyAlbums.RotationSpeed = 100;
+            this.f_LoadingCircleShowMyAlbums.Size = new System.Drawing.Size(75, 23);
+            this.f_LoadingCircleShowMyAlbums.SpokeThickness = 4;
+            this.f_LoadingCircleShowMyAlbums.StylePreset = MRG.Controls.UI.LoadingCircle.StylePresets.MacOSX;
+            this.f_LoadingCircleShowMyAlbums.TabIndex = 104;
+            this.f_LoadingCircleShowMyAlbums.Text = "loadingCircle3";
+            this.f_LoadingCircleShowMyAlbums.Visible = false;
             // 
             // FormMain
             // 
@@ -664,7 +734,6 @@
         private System.Windows.Forms.Button f_ButtonShowFriends;
         private System.Windows.Forms.Button f_ButtonPost;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label f_LabelPleaseWait;
         private System.Windows.Forms.Button f_ButtonShowLikes;
         private System.Windows.Forms.Button f_ButtonMyAlbums;
         private System.Windows.Forms.Label label2;
@@ -689,5 +758,10 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.ToolStripButton userBindingNavigatorSaveItem;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private MRG.Controls.UI.LoadingCircle f_LoadingCircleShowFriend;
+        private MRG.Controls.UI.LoadingCircle f_LoadingCircleShowMyAlbums;
+        private MRG.Controls.UI.LoadingCircle f_LoadingCircleShowMyLikes;
+        private MRG.Controls.UI.LoadingCircle f_LoadingCircleShowCheckins;
     }
 }

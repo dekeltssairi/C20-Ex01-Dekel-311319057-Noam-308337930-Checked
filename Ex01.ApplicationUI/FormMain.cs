@@ -27,20 +27,21 @@ namespace Ex01.ApplicationUI
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            f_LabelPleaseWait.Visible = true;
+            login();
+        }
+
+        private void login()
+        {
             r_FBConnector.LogIn();
             r_AppSettings.LastAccessToken = r_FBConnector.AccessToken;
-            
             fetchUserInfo();
-            f_LabelPleaseWait.Visible = false;
         }
 
         protected override void OnShown(EventArgs e)
         {
             if (r_AppSettings.RememberUser && !string.IsNullOrEmpty(r_AppSettings.LastAccessToken))
             {
-                r_FBConnector.Connect(r_AppSettings.LastAccessToken);
-                fetchUserInfo();
+                backgroundWorker1.RunWorkerAsync();
             }
         }
 
@@ -48,7 +49,6 @@ namespace Ex01.ApplicationUI
         {
             r_FBConnector.LoggedUser = r_FBConnector.LoginResult.LoggedInUser;
             userBindingSource.DataSource = r_FBConnector.LoggedUser;
-            //f_PictureBoxProfile.Load(r_FBConnector.LoggedUser.PictureNormalURL);
             handleButtonsVisibility();
             exposeLabels();
         }
@@ -68,17 +68,7 @@ namespace Ex01.ApplicationUI
                 button.Enabled = !button.Enabled;
             }
 
-            /*f_ButtonPost.Enabled = !f_ButtonPost.Enabled;
-            f_ButtonLogin.Enabled = !f_ButtonLogin.Enabled;
-            f_ButtonLogout.Enabled = !f_ButtonLogout.Enabled;
-            f_ButtonCovid19.Enabled = !f_ButtonCovid19.Enabled;
-            f_ButtonMyAlbums.Enabled = !f_ButtonMyAlbums.Enabled;
-            f_ButtonShowLikes.Enabled = !f_ButtonShowLikes.Enabled;
-            f_ButtonShowChekins.Enabled = !f_ButtonShowChekins.Enabled;
-            f_ButtonShowMyPosts.Enabled = !f_ButtonShowMyPosts.Enabled;
-            f_ButtonShowFriends.Enabled = !f_ButtonShowFriends.Enabled;
-            f_ButtonShowMyEvents.Enabled = !f_ButtonShowMyEvents.Enabled;
-            f_ButtonShowMostDiggingFriend.Enabled = !f_ButtonShowMostDiggingFriend.Enabled;*/
+            f_ButtonLogin.Enabled = false;
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -108,20 +98,27 @@ namespace Ex01.ApplicationUI
 
         private void fetchPosts()
         {
+
             foreach (Post post in r_FBConnector.LoggedUser.Posts)
             {
+                string itemText;
                 if (post.Message != null)
                 {
-                    f_ListBoxPosts.Items.Add(post.Message);
+                    itemText = post.Message;
+                    //f_ListBoxPosts.Items.Add(post.Message);
                 }
                 else if (post.Caption != null)
                 {
-                    f_ListBoxPosts.Items.Add(post.Caption);
+                    itemText = post.Caption;
+                    //f_ListBoxPosts.Items.Add(post.Caption);
                 }
                 else
                 {
-                    f_ListBoxPosts.Items.Add(string.Format("[{0}]", post.Type));
+                    itemText = string.Format("[{0}]", post.Type);
+                    //f_ListBoxPosts.Items.Add(string.Format("[{0}]", post.Type));
                 }
+
+                f_ListBoxPosts.Invoke(new Action(() => f_ListBoxPosts.Items.Add(itemText)));
             }
 
             if (r_FBConnector.LoggedUser.Posts.Count == 0)
@@ -148,42 +145,27 @@ namespace Ex01.ApplicationUI
 
         private void f_ShowFriendsButton_Click(object sender, EventArgs e)
         {
-            f_LabelPleaseWait.Visible = true;
-            if (r_FBConnector.LoggedUser == null)
-            {
-                MessageBox.Show("You must loggin first!");
-            }
-            else if (r_FBConnector.LoggedUser.Friends.Count == 0)
-            {
-                MessageBox.Show("No Friends to retrieve :(");
-            }
-            else
-            {
-                new FormFriendList(r_FBConnector.LoggedUser.Friends).ShowDialog();
-            }
+            f_LoadingCircleShowFriend.Visible = true;
+            f_LoadingCircleShowFriend.Active = true;
+            new Thread(onShowFriendsThreads).Start();
+        }
 
-            f_LabelPleaseWait.Visible = false;
+        private void onShowFriendsThreads()
+        {
+            new FormFriendList(r_FBConnector.LoggedUser.Friends, f_LoadingCircleShowFriend).ShowDialog();
         }
 
         private void f_CheckinsButton_Click(object sender, EventArgs e)
         {
-            f_LabelPleaseWait.Visible = true;
-            if (r_FBConnector.LoggedUser == null)
-            {
-                MessageBox.Show("You must loggin first!");
-            }
-            else if (r_FBConnector.LoggedUser.Checkins.Count == 0)
-            {
-                MessageBox.Show("No Checkins to retrieve :(");
-            }
-            else
-            {
-                new FormCheckinList(r_FBConnector.LoggedUser.Checkins).ShowDialog();
-            }
-
-            f_LabelPleaseWait.Visible = false;
+            f_LoadingCircleShowCheckins.Visible = true;
+            f_LoadingCircleShowCheckins.Active = true;
+            new Thread(onShowCheckinsThread).Start();
         }
 
+        private void onShowCheckinsThread()
+        {
+            new FormCheckinList(r_FBConnector.LoggedUser.Checkins, f_LoadingCircleShowCheckins).ShowDialog();
+        }
         private void fetchEvents()
         {
             f_ListBoxEvents.DisplayMember = "Name";
@@ -195,7 +177,6 @@ namespace Ex01.ApplicationUI
 
         private void buttonMostDiggingFriend_Click(object sender, EventArgs e)
         {
-            f_LabelPleaseWait.Visible = true;
             if (r_FBConnector.LoggedUser != null)
             {
                 DateTime lastYear = DateTime.Today.AddYears(-1);
@@ -226,8 +207,6 @@ namespace Ex01.ApplicationUI
             {
                 MessageBox.Show("You must loggin first!");
             }
-
-            f_LabelPleaseWait.Visible = false;
         }
 
         private void f_Postbutton_Click(object sender, EventArgs e)
@@ -237,8 +216,6 @@ namespace Ex01.ApplicationUI
 
         private void Covid19_button_Click(object sender, EventArgs e)
         {
-            f_LabelPleaseWait.Visible = true;
-
             if (r_FBConnector.LoggedUser == null)
             {
                 MessageBox.Show("You must loggin first!");
@@ -255,30 +232,29 @@ namespace Ex01.ApplicationUI
                 }
             }
 
-            f_LabelPleaseWait.Visible = false;
+           
         }
 
         private void buttonShowMyPost_Click(object sender, EventArgs e)
         {
-            f_LabelPleaseWait.Visible = true;
+           
 
             if (r_FBConnector.LoggedUser != null)
             {
                 f_ListBoxPosts.Items.Clear();
-                fetchPosts();
+                new Thread(fetchPosts).Start() ;
             }
             else
             {
                 MessageBox.Show("You must loggin first!");
             }
 
-            f_LabelPleaseWait.Visible = false;
+           
         }
 
         private void buttonShowMyEvents_Click(object sender, EventArgs e)
         {
-            f_LabelPleaseWait.Visible = true;
-
+            
             if (r_FBConnector.LoggedUser == null)
             {
                 MessageBox.Show("You must loggin first!");
@@ -292,7 +268,7 @@ namespace Ex01.ApplicationUI
                 fetchEvents();
             }
 
-            f_LabelPleaseWait.Visible = false;
+            
         }
 
         private void buttonShowMyLikes_Click(object sender, EventArgs e)
@@ -302,20 +278,28 @@ namespace Ex01.ApplicationUI
 
         private void buttonMyAlbums_Click(object sender, EventArgs e)
         {
-            f_LabelPleaseWait.Visible = true;
-            if (r_FBConnector.LoggedUser == null)
-            {
-                MessageBox.Show("You must loggin first!");
-            }
-            else if (r_FBConnector.LoggedUser.Albums.Count == 0)
-            {
-                MessageBox.Show("No albums to retrieve :(");
-            }
-            else
-            {
-                f_LabelPleaseWait.Visible = false;
-                new FormAlbums(r_FBConnector.LoggedUser.Albums).ShowDialog();  
-            }
+            f_LoadingCircleShowMyAlbums.Visible = true;
+            f_LoadingCircleShowMyAlbums.Active = true;
+            new Thread(onShowAlbumsThread).Start();
+        }
+
+        private void onShowAlbumsThread()
+        {
+            new FormAlbums(r_FBConnector.LoggedUser.Albums, f_LoadingCircleShowMyAlbums).ShowDialog();
+
+        }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            r_FBConnector.Connect(r_AppSettings.LastAccessToken);
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            r_FBConnector.LoggedUser = r_FBConnector.LoginResult.LoggedInUser;
+            userBindingSource.DataSource = r_FBConnector.LoggedUser;
+            handleButtonsVisibility();
+            exposeLabels();
         }
     }
 }

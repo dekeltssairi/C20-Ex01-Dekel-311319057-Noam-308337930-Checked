@@ -1,16 +1,19 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
+using MRG.Controls.UI;
 
 namespace Ex01.ApplicationUI
 {
     public partial class FormAlbums : Form
     {
         private readonly FacebookObjectCollection<Album> r_Albums;
-        private int m_AlbumIndex;
+        private readonly LoadingCircle m_LoadingCircleShowMyAlbums;
 
-        public FormAlbums(FacebookObjectCollection<Album> i_Albums)
+        public FormAlbums(FacebookObjectCollection<Album> i_Albums, MRG.Controls.UI.LoadingCircle i_LoadingCircleShowMyAlbums)
         {
             r_Albums = i_Albums;
+            m_LoadingCircleShowMyAlbums = i_LoadingCircleShowMyAlbums;
             InitializeComponent();                      //desginer code
             initializeComponent();                      //our code
         }
@@ -19,24 +22,15 @@ namespace Ex01.ApplicationUI
         {
             albumBindingSource.DataSource = r_Albums;
         }
-        private void previousLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+
+        protected override void OnShown(EventArgs e)
         {
-            if (m_AlbumIndex > 0)
+            base.OnShown(e);
+            m_LoadingCircleShowMyAlbums.Invoke(new Action(() =>
             {
-                m_AlbumIndex--;
-            }
-
-            initializeComponent();
-        }
-
-        private void nextLinkLable_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            if (m_AlbumIndex < r_Albums.Count - 1)
-            {
-                m_AlbumIndex++;
-            }
-
-            initializeComponent();
+                m_LoadingCircleShowMyAlbums.Visible = false;
+                m_LoadingCircleShowMyAlbums.Enabled = false;
+            }));
         }
     }
 }
