@@ -114,18 +114,11 @@ namespace Ex01.ApplicationUI
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
-            if (r_FBConnector.LoggedUser != null)
-            {
                 FacebookService.Logout(() => { });
                 f_CheckBoxRememberMe.Checked = false;
                 r_AppSettings.RememberUser = false;
                 r_AppSettings.SaveToFile();
                 clearForm();
-            }
-            else
-            {
-                MessageBox.Show("You must loggin first!");
-            }
         }
 
         private void f_ShowFriendsButton_Click(object sender, EventArgs e)
@@ -252,8 +245,6 @@ namespace Ex01.ApplicationUI
                     MessageBox.Show("You dont have any chekins");
                 }
             }
-
-
         }
 
         private void buttonShowMyPost_Click(object sender, EventArgs e)
