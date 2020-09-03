@@ -13,8 +13,6 @@ namespace Ex01.ApplicationUI
     public partial class FormMain : Form
     {
         private readonly FacadeLayer.FacadeFacebook m_FacadeFacebook = new FacadeLayer.FacadeFacebook();
-        //private readonly FBConnector r_FBConnector = new FBConnector();
-        //private readonly ApplicationSettings r_AppSettings = ApplicationSettings.LoadFromFile();
 
         public FormMain()
         {
@@ -34,19 +32,7 @@ namespace Ex01.ApplicationUI
             userBindingSource.DataSource = m_FacadeFacebook.LoggedUser;
             handleButtonsVisibility();
             exposeLabels();
-
-
-
-            //login();
         }
-
-        /*        private void login()
-                {
-
-        *//*            r_FBConnector.LogIn();
-                    r_AppSettings.LastAccessToken = r_FBConnector.AccessToken;
-                    fetchUserInfo();*//*
-                }*/
 
         protected override void OnShown(EventArgs e)
         {
@@ -58,14 +44,6 @@ namespace Ex01.ApplicationUI
                 exposeLabels();
                 handleButtonsVisibility();
             }
-        }
-
-        private void fetchUserInfo()
-        {
-            //r_FBConnector.LoggedUser = r_FBConnector.LoginResult.LoggedInUser;
-            //userBindingSource.DataSource = r_FBConnector.LoggedUser;
-            handleButtonsVisibility();
-            exposeLabels();
         }
 
         private void exposeLabels()
@@ -106,6 +84,7 @@ namespace Ex01.ApplicationUI
 
             base.OnFormClosing(e);
 
+            //UISetting uiSetting = new UISetting() { LastWindowSize = Size , LastWindowLocation = Location};
             m_FacadeFacebook.LogicSettings.LastWindowLocation = Location;
             m_FacadeFacebook.LogicSettings.LastWindowSize = Size;
             m_FacadeFacebook.LogicSettings.RememberUser = f_CheckBoxRememberMe.Checked;

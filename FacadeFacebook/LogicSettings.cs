@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace FacadeFacebook
 {
-    public class LogicSettings
+    public class LogicSettings                                  // should split to logic setting and ui setting.
     {
         public bool RememberUser { get; set; }
 
@@ -35,18 +35,23 @@ namespace FacadeFacebook
 
             if (logicSettings.RememberUser == false)
             {
-                logicSettings= new LogicSettings();
+                logicSettings.initialize();
             }
 
             return logicSettings;
         }
 
-        public LogicSettings()
+        private void initialize()
         {
             LastWindowLocation = new Point(20, 20);
             LastWindowSize = new Size(1150, 640);
             RememberUser = false;
             LastAccessToken = null;
+        }
+
+        private LogicSettings()
+        {
+            initialize();
         }
 
         public void SaveToFile()

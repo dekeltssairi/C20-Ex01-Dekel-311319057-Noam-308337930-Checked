@@ -92,6 +92,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="UISetting.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Ex01.ApplicationEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
