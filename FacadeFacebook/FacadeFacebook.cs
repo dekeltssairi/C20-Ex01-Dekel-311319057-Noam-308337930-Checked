@@ -1,11 +1,13 @@
-﻿using FacebookWrapper;
+﻿using FacadeFacebook;
+using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
-namespace FacadeFacebook
+namespace FacadeLayer
 {
     public class FacadeFacebook
     {
@@ -13,9 +15,20 @@ namespace FacadeFacebook
         public User LoggedUser { get; set; }
         public string AccessToken { get; set; }
 
-        private readonly LogicSettings r_LogicSettings = LogicSettings.LoadFromFile();
+        public LogicSettings LogicSettings{ get; set; }
+        public bool RememberUser { get; set; }
+        public Point LastWindowLocation { get; set; }
+        public string LastAccessToken { get; set; }
+        public Size LastWindowSize { get; set; }
 
         private string k_AppId = "343280916704350";
+
+        public FacadeFacebook()
+        {
+            LogicSettings = LogicSettings.LoadFromFile();
+            RememberUser = LogicSettings.RememberUser;
+            LastWindowLocation = LogicSettings.LastWindowLocation;
+        }
 
 
 
@@ -88,6 +101,10 @@ namespace FacadeFacebook
                 "user_photos",
                 "user_videos");
             AccessToken = LoginResult.AccessToken;
+
+            LogicSettings.LastAccessToken = AccessToken;
+
+            LoggedUser = LoginResult.LoggedInUser;
         }
 
         public void Connect(string i_LastAccessToken)
@@ -95,13 +112,63 @@ namespace FacadeFacebook
             LoginResult = FacebookService.Connect(i_LastAccessToken);
         }
 
+        public void Connect()
+        {
+            LoginResult = FacebookService.Connect(LogicSettings.LastAccessToken);
+            LoggedUser = LoginResult.LoggedInUser;
+        }
+
         public void Logout()
         {
             FacebookService.Logout(() => { });
-            //f_CheckBoxRememberMe.Checked = false;
-            r_LogicSettings.RememberUser = false;
-            r_LogicSettings.SaveToFile();
-            //clearForm();
+            LogicSettings.RememberUser = false;
+            LogicSettings.SaveToFile();
+        }
+
+
+        public bool IsLoggedUserHasAlbums()
+        {
+            return LoggedUser.Albums.Count > 0;
+        }
+
+        public FacebookObjectCollection<Album> GetLoggedUserAlbums()
+        {
+            return LoggedUser.Albums;
+        }
+
+        public IEnumerable<Post> GetLoggedUserPosts()
+        {
+            return LoggedUser.Posts;
+        }
+
+        public bool IsLoggedUserHasPosts()
+        {
+            return LoggedUser.Posts.Count > 0;
+        }
+
+        public bool isLoggedUserHasFriends()
+        {
+            return LoggedUser.Friends.Count > 0;
+        }
+
+        public FacebookObjectCollection<User> GetLoggedUserFriends()
+        {
+            return LoggedUser.Friends;
+        }
+
+        public bool IsLoggedUserHasCheckins()
+        {
+            return LoggedUser.Checkins.Count > 0;
+        }
+
+        public bool IsLoggedUserHasEvents()
+        {
+            return LoggedUser.Events.Count > 0;
+        }
+
+        public FacebookObjectCollection<Event> GetLoggedUserEvents()
+        {
+            return LoggedUser.Events;
         }
     }
 }

@@ -14,10 +14,10 @@ namespace FacadeFacebook
 
         public string LastAccessToken { get; set; }
 
-/*      public Point LastWindowLocation { get; set; }
+        public Point LastWindowLocation { get; set; }
 
         public Size LastWindowSize { get; set; }
-*/
+
         private const string k_SettingsFileSuffix = @"\\AppSettings.xml";
 
         public static LogicSettings LoadFromFile()
@@ -43,8 +43,8 @@ namespace FacadeFacebook
 
         public LogicSettings()
         {
-         //   LastWindowLocation = new Point(20, 20);
-         //   LastWindowSize = new Size(1150, 640);
+            LastWindowLocation = new Point(20, 20);
+            LastWindowSize = new Size(1150, 640);
             RememberUser = false;
             LastAccessToken = null;
         }

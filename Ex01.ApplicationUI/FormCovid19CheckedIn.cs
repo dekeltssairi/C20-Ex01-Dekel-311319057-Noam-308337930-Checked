@@ -7,12 +7,12 @@ namespace Ex01.ApplicationUI
 {
     public partial class FormCovid19CheckedIn : Form
     {
-        private readonly FBConnector r_FBConnector;
+        private readonly User m_LoggedUser;
         private readonly Covid19SickPeople r_ConfirmedSickPeople = Covid19SickPeople.LoadFromFile();
 
-        public FormCovid19CheckedIn(FBConnector i_FBConnector)
+        public FormCovid19CheckedIn(User i_LoggedUser)
         {
-            r_FBConnector = i_FBConnector;
+            m_LoggedUser = i_LoggedUser;
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.FixedSingle;
         }
@@ -143,7 +143,7 @@ namespace Ex01.ApplicationUI
 
         private void CheckMyCheckins_button_Click(object sender, EventArgs e)
         {
-            FacebookObjectCollection<Checkin> checkins = r_FBConnector.LoggedUser.Checkins;
+            FacebookObjectCollection<Checkin> checkins = m_LoggedUser.Checkins;
             ConfirmedSickLocation LocationInput = new ConfirmedSickLocation();
             bool result = false;
             foreach (Checkin checkin in checkins)
@@ -170,7 +170,7 @@ namespace Ex01.ApplicationUI
         {
             ResultStatus_label.Text = " ";
             Locations_listBox.Items.Clear();
-            FacebookObjectCollection<Checkin> checkins = r_FBConnector.LoggedUser.Checkins;
+            FacebookObjectCollection<Checkin> checkins = m_LoggedUser.Checkins;
             foreach (Checkin checkin in checkins)
             {
                 Locations_listBox.Items.Add(checkin);
@@ -232,7 +232,7 @@ namespace Ex01.ApplicationUI
         private void loadFriend_button_Click(object sender, EventArgs e)
         {
             ResultStatus_label.Text = " ";
-            foreach (User friend in r_FBConnector.LoggedUser.Friends)
+            foreach (User friend in m_LoggedUser.Friends)
             {
                 Friends_listBox.Items.Add(friend);
                 friend.ReFetch(DynamicWrapper.eLoadOptions.Full);

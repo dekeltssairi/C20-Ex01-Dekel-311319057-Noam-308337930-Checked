@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ex01.ApplicationEngine
+namespace FacadeFacebook
 {
     public class Utilities
     {

@@ -41,10 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationSettings.cs" />
-    <Compile Include="ConfirmedSickLocation.cs" />
-    <Compile Include="Covid19SickPeople.cs" />
     <Compile Include="FBConnector.cs" />
-    <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Facebook">

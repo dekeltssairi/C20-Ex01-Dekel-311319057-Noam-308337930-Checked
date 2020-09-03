@@ -4,15 +4,17 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Windows.Forms;
 using Ex01.ApplicationEngine;
+using FacadeFacebook;
+using FacadeLayer;
 using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
-
 namespace Ex01.ApplicationUI
 {
     public partial class FormMain : Form
     {
-        private readonly FBConnector r_FBConnector = new FBConnector();
-        private readonly ApplicationSettings r_AppSettings = ApplicationSettings.LoadFromFile();
+        private readonly FacadeLayer.FacadeFacebook m_FacadeFacebook = new FacadeLayer.FacadeFacebook();
+        //private readonly FBConnector r_FBConnector = new FBConnector();
+        //private readonly ApplicationSettings r_AppSettings = ApplicationSettings.LoadFromFile();
 
         public FormMain()
         {
@@ -22,34 +24,46 @@ namespace Ex01.ApplicationUI
         private void applyAppSettings()
         {
             StartPosition = FormStartPosition.Manual;
-            f_CheckBoxRememberMe.Checked = r_AppSettings.RememberUser;
-            Location = r_AppSettings.LastWindowLocation;
+            f_CheckBoxRememberMe.Checked = m_FacadeFacebook.LogicSettings.RememberUser;
+            Location = m_FacadeFacebook.LogicSettings.LastWindowLocation;
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            login();
+            m_FacadeFacebook.LogIn();
+            userBindingSource.DataSource = m_FacadeFacebook.LoggedUser;
+            handleButtonsVisibility();
+            exposeLabels();
+
+
+
+            //login();
         }
 
-        private void login()
-        {
-            r_FBConnector.LogIn();
-            r_AppSettings.LastAccessToken = r_FBConnector.AccessToken;
-            fetchUserInfo();
-        }
+        /*        private void login()
+                {
+
+        *//*            r_FBConnector.LogIn();
+                    r_AppSettings.LastAccessToken = r_FBConnector.AccessToken;
+                    fetchUserInfo();*//*
+                }*/
 
         protected override void OnShown(EventArgs e)
         {
-            if (r_AppSettings.RememberUser && !string.IsNullOrEmpty(r_AppSettings.LastAccessToken))
+            if (m_FacadeFacebook.LogicSettings.RememberUser && !string.IsNullOrEmpty(m_FacadeFacebook.LogicSettings.LastAccessToken))
             {
-                backgroundWorker1.RunWorkerAsync();
+                applyAppSettings();
+                m_FacadeFacebook.Connect();
+                userBindingSource.DataSource = m_FacadeFacebook.LoggedUser;
+                exposeLabels();
+                handleButtonsVisibility();
             }
         }
 
         private void fetchUserInfo()
         {
-            r_FBConnector.LoggedUser = r_FBConnector.LoginResult.LoggedInUser;
-            userBindingSource.DataSource = r_FBConnector.LoggedUser;
+            //r_FBConnector.LoggedUser = r_FBConnector.LoginResult.LoggedInUser;
+            //userBindingSource.DataSource = r_FBConnector.LoggedUser;
             handleButtonsVisibility();
             exposeLabels();
         }
@@ -74,7 +88,7 @@ namespace Ex01.ApplicationUI
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            base.OnFormClosing(e);
+            /*base.OnFormClosing(e);
 
             r_AppSettings.LastWindowLocation = Location;
             r_AppSettings.LastWindowSize = Size;
@@ -88,7 +102,23 @@ namespace Ex01.ApplicationUI
                 r_AppSettings.LastAccessToken = null;
             }
 
-            r_AppSettings.SaveToFile();
+            r_AppSettings.SaveToFile();*/
+
+            base.OnFormClosing(e);
+
+            m_FacadeFacebook.LogicSettings.LastWindowLocation = Location;
+            m_FacadeFacebook.LogicSettings.LastWindowSize = Size;
+            m_FacadeFacebook.LogicSettings.RememberUser = f_CheckBoxRememberMe.Checked;
+            if (m_FacadeFacebook.LogicSettings.RememberUser)
+            {
+                m_FacadeFacebook.LogicSettings.LastAccessToken = m_FacadeFacebook.LoginResult.AccessToken;
+            }
+            else
+            {
+                m_FacadeFacebook.LastAccessToken = null;
+            }
+
+            m_FacadeFacebook.LogicSettings.SaveToFile();
         }
 
         private void clearForm()
@@ -100,7 +130,7 @@ namespace Ex01.ApplicationUI
         private void onFetchPostsThread()
         {
 
-            foreach (Post post in r_FBConnector.LoggedUser.Posts)
+            /*foreach (Post post in m_FacadeFacebook.LoggedUser.Posts)
             {
                 new PostProxy() { Post = post };
                 f_ListBoxPosts.Invoke(new Action(() => f_ListBoxPosts.Items.Add(new PostProxy { Post = post })));
@@ -109,34 +139,56 @@ namespace Ex01.ApplicationUI
             if (r_FBConnector.LoggedUser.Posts.Count == 0)
             {
                 MessageBox.Show("No Posts to retrieve :(");
+            }*/
+            foreach (Post post in m_FacadeFacebook.GetLoggedUserPosts())
+            {
+                f_ListBoxPosts.Invoke(new Action(() => f_ListBoxPosts.Items.Add(new PostProxy { Post = post })));
+            }
+
+            if (!m_FacadeFacebook.IsLoggedUserHasPosts())
+            {
+                MessageBox.Show("No Posts to retrieve :(");
             }
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
-                FacebookService.Logout(() => { });
-                f_CheckBoxRememberMe.Checked = false;
-                r_AppSettings.RememberUser = false;
-                r_AppSettings.SaveToFile();
-                clearForm();
+            /*                FacebookService.Logout(() => { });
+                            f_CheckBoxRememberMe.Checked = false;
+                            r_AppSettings.RememberUser = false;
+                            r_AppSettings.SaveToFile();
+                            clearForm();*/
+
+            m_FacadeFacebook.Logout();
+            clearForm();
+
         }
 
         private void f_ShowFriendsButton_Click(object sender, EventArgs e)
         {
             f_LoadingCircleShowFriend.Visible = true;
             f_LoadingCircleShowFriend.Active = true;
-            new Thread(onShowFriendsThreads).Start();
+            new Thread(onShowFriendsThread).Start();
         }
 
-        private void onShowFriendsThreads()
+        private void onShowFriendsThread()
         {
-            if (r_FBConnector.LoggedUser.Friends.Count == 0)
+            /*if (r_FBConnector.LoggedUser.Friends.Count == 0)
             {
                 MessageBox.Show("No Friends to retrieve :(");
             }
             else
             {
                 new FormFriendList(r_FBConnector.LoggedUser.Friends, f_LoadingCircleShowFriend).ShowDialog();
+            }*/
+
+            if (!m_FacadeFacebook.isLoggedUserHasFriends())
+            {
+                MessageBox.Show("No Friends to retrieve :(");
+            }
+            else
+            {
+                new FormFriendList(m_FacadeFacebook.GetLoggedUserFriends(), f_LoadingCircleShowFriend).ShowDialog();
             }
         }
 
@@ -149,25 +201,44 @@ namespace Ex01.ApplicationUI
 
         private void onShowCheckinsThread()
         {
-            if (r_FBConnector.LoggedUser.Checkins.Count == 0)
+            /*if (r_FBConnector.LoggedUser.Checkins.Count == 0)
             {
                 MessageBox.Show("No Posts to retrieve :(");
             }
             else
             {
                 new FormCheckinList(r_FBConnector.LoggedUser.Checkins, f_LoadingCircleShowCheckins).ShowDialog();
+            }*/
+
+            if (!m_FacadeFacebook.IsLoggedUserHasCheckins())
+            {
+                MessageBox.Show("No Posts to retrieve :(");
+            }
+            else
+            {
+                new FormCheckinList(m_FacadeFacebook.GetCheckins(), f_LoadingCircleShowCheckins).ShowDialog();
             }
         }
         private void onFetchEventsThread()
         {
-            if (r_FBConnector.LoggedUser.Events.Count == 0)
+            /*if (r_FBConnector.LoggedUser.Events.Count == 0)
             {
                 MessageBox.Show("No Events to retrieve :(");
             }
             else
             {
                 new FormEventsList(r_FBConnector.LoggedUser.Events, f_LoadingCircleShowEvents).ShowDialog();
+            }*/
+
+            if (!m_FacadeFacebook.IsLoggedUserHasEvents())
+            {
+                MessageBox.Show("No Events to retrieve :(");
             }
+            else
+            {
+                new FormEventsList(m_FacadeFacebook.GetLoggedUserEvents(), f_LoadingCircleShowEvents).ShowDialog();
+            }
+
 
             //eventBindingSource.DataSource = r_FBConnector.LoggedUser.Events;
             /*f_ListBoxEvents.DisplayMember = "Name";
@@ -179,37 +250,48 @@ namespace Ex01.ApplicationUI
 
         private void onMostDiggingFriendThread()
         {
-            if (r_FBConnector.LoggedUser.Friends.Count == 0)
+            /*        if (r_FBConnector.LoggedUser.Friends.Count == 0)
+                    {
+                        MessageBox.Show("You Don't have any friends :(");
+                    }
+                    else
+                    {
+                        f_LoadingCircleShowMostDiggingFriend.Visible = true;
+                        f_LoadingCircleShowMostDiggingFriend.Active = true;
+                        DateTime lastYear = DateTime.Today.AddYears(-1);
+                        User mostDiggingFriend = null;
+                        int postCounter, maxNumOfPosts = 0;
+
+                        foreach (User friend in r_FBConnector.LoggedUser.Friends)
+                        {
+                            postCounter = 0;
+                            foreach (Post post in friend.Posts)
+                            {
+                                if (post.CreatedTime > lastYear)
+                                {
+                                    postCounter++;
+                                }
+                            }
+
+                            if (postCounter > maxNumOfPosts)
+                            {
+                                maxNumOfPosts = postCounter;
+                                mostDiggingFriend = friend;
+                            }
+                        }
+
+                        new FormMosiftDiggingFriend(mostDiggingFriend, maxNumOfPosts, f_LoadingCircleShowMostDiggingFriend).ShowDialog();
+                    }
+        */
+            if (!m_FacadeFacebook.isLoggedUserHasFriends())
             {
                 MessageBox.Show("You Don't have any friends :(");
             }
             else
             {
-                f_LoadingCircleShowMostDiggingFriend.Visible = true;
-                f_LoadingCircleShowMostDiggingFriend.Active = true;
-                DateTime lastYear = DateTime.Today.AddYears(-1);
-                User mostDiggingFriend = null;
-                int postCounter, maxNumOfPosts = 0;
+                DigginFriend digginFriend = m_FacadeFacebook.GetDigginFriend();
 
-                foreach (User friend in r_FBConnector.LoggedUser.Friends)
-                {
-                    postCounter = 0;
-                    foreach (Post post in friend.Posts)
-                    {
-                        if (post.CreatedTime > lastYear)
-                        {
-                            postCounter++;
-                        }
-                    }
-
-                    if (postCounter > maxNumOfPosts)
-                    {
-                        maxNumOfPosts = postCounter;
-                        mostDiggingFriend = friend;
-                    }
-                }
-
-                new FormMosiftDiggingFriend(mostDiggingFriend, maxNumOfPosts, f_LoadingCircleShowMostDiggingFriend).ShowDialog();
+                new FormMosiftDiggingFriend(digginFriend, f_LoadingCircleShowMostDiggingFriend).ShowDialog();
             }
 
         }
@@ -219,7 +301,7 @@ namespace Ex01.ApplicationUI
             f_LoadingCircleShowMostDiggingFriend.Visible = true;
             f_LoadingCircleShowMostDiggingFriend.Active = true;
             new Thread(onMostDiggingFriendThread).Start();
-            
+
         }
 
 
@@ -230,70 +312,82 @@ namespace Ex01.ApplicationUI
 
         private void Covid19_button_Click(object sender, EventArgs e)
         {
-            if (r_FBConnector.LoggedUser == null)
+            try
             {
-                MessageBox.Show("You must loggin first!");
+                new FormCovid19CheckedIn(m_FacadeFacebook.LoggedUser).ShowDialog();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("You dont have any chekins");
+            }
+        }
+
+        private void onShowAlbumsThread()
+        {
+            /*            if (m_FacadeFacebook.LoggedUser.Albums.Count == 0)
+                        {
+                            MessageBox.Show("No Albums to retrieve :(");
+                        }
+                        else
+                        {
+                            new FormAlbums(r_FBConnector.LoggedUser.Albums, f_LoadingCircleShowMyAlbums).ShowDialog();
+                        }*/
+
+            if (!m_FacadeFacebook.IsLoggedUserHasAlbums())
+            {
+                MessageBox.Show("No Albums to retrieve :(");
             }
             else
             {
-                try
-                {
-                    new FormCovid19CheckedIn(r_FBConnector).ShowDialog();
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("You dont have any chekins");
-                }
+                new FormAlbums(m_FacadeFacebook.GetLoggedUserAlbums(), f_LoadingCircleShowMyAlbums).ShowDialog();
             }
         }
 
-        private void buttonShowMyPost_Click(object sender, EventArgs e)
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            f_ListBoxPosts.Items.Clear();
-            new Thread(onFetchPostsThread).Start();
-        }
-        private void buttonShowMyEvents_Click(object sender, EventArgs e)
-        {
-            f_LoadingCircleShowEvents.Visible = true;
-            f_LoadingCircleShowEvents.Active = true;
-            new Thread(onFetchEventsThread).Start();
+            //m_FacadeFacebook.Connect(m_FacadeFacebook.LastAccessToken);
+            m_FacadeFacebook.Connect();
+            userBindingSource.DataSource = m_FacadeFacebook.LoggedUser;
+            handleButtonsVisibility();
+            exposeLabels();
+
         }
 
-        private void buttonShowMyLikes_Click(object sender, EventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            /*r_FBConnector.LoggedUser = r_FBConnector.LoginResult.LoggedInUser;
+            userBindingSource.DataSource = r_FBConnector.LoggedUser;
+            handleButtonsVisibility();
+            exposeLabels();*/
+
+            userBindingSource.DataSource = m_FacadeFacebook.LoggedUser;
+            handleButtonsVisibility();
+            exposeLabels();
+        }
+
+        private void f_ButtonShowLikes_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Out of Permission!");
         }
 
-        private void buttonMyAlbums_Click(object sender, EventArgs e)
+        private void f_ButtonMyAlbums_Click(object sender, EventArgs e)
         {
             f_LoadingCircleShowMyAlbums.Visible = true;
             f_LoadingCircleShowMyAlbums.Active = true;
             new Thread(onShowAlbumsThread).Start();
         }
 
-        private void onShowAlbumsThread()
+        private void f_ButtonShowMyEvents_Click(object sender, EventArgs e)
         {
-            if (r_FBConnector.LoggedUser.Albums.Count == 0)
-            {
-                MessageBox.Show("No Albums to retrieve :(");
-            }
-            else
-            {
-                new FormAlbums(r_FBConnector.LoggedUser.Albums, f_LoadingCircleShowMyAlbums).ShowDialog();
-            }
+            f_LoadingCircleShowEvents.Visible = true;
+            f_LoadingCircleShowEvents.Active = true;
+            new Thread(onFetchEventsThread).Start();
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void f_ButtonShowMyPosts_Click(object sender, EventArgs e)
         {
-            r_FBConnector.Connect(r_AppSettings.LastAccessToken);
-        }
-
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-            r_FBConnector.LoggedUser = r_FBConnector.LoginResult.LoggedInUser;
-            userBindingSource.DataSource = r_FBConnector.LoggedUser;
-            handleButtonsVisibility();
-            exposeLabels();
+            f_ListBoxPosts.Items.Clear();
+            new Thread(onFetchPostsThread).Start();
         }
     }
 }

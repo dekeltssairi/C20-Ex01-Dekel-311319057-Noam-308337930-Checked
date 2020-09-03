@@ -30,11 +30,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMosiftDiggingFriend));
             System.Windows.Forms.Label aboutLabel;
             System.Windows.Forms.Label birthdayLabel;
             System.Windows.Forms.Label imageNormalLabel;
             System.Windows.Forms.Label nameLabel;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMosiftDiggingFriend));
             this.f_LabelFriendName = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
@@ -42,24 +42,24 @@
             this.f_PictureBoxProfilePicture = new System.Windows.Forms.PictureBox();
             this.f_LabelNumOfPosts = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.aboutLabel1 = new System.Windows.Forms.Label();
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.birthdayLabel1 = new System.Windows.Forms.Label();
+            this.imageNormalPictureBox = new System.Windows.Forms.PictureBox();
+            this.nameLabel1 = new System.Windows.Forms.Label();
             this.userBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.userBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
-            this.aboutLabel1 = new System.Windows.Forms.Label();
-            this.birthdayLabel1 = new System.Windows.Forms.Label();
-            this.imageNormalPictureBox = new System.Windows.Forms.PictureBox();
-            this.nameLabel1 = new System.Windows.Forms.Label();
             aboutLabel = new System.Windows.Forms.Label();
             birthdayLabel = new System.Windows.Forms.Label();
             imageNormalLabel = new System.Windows.Forms.Label();
@@ -69,10 +69,46 @@
             ((System.ComponentModel.ISupportInitialize)(this.f_PictureBoxProfilePicture)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageNormalPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingNavigator)).BeginInit();
             this.userBindingNavigator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imageNormalPictureBox)).BeginInit();
             this.SuspendLayout();
+            // 
+            // aboutLabel
+            // 
+            aboutLabel.AutoSize = true;
+            aboutLabel.Location = new System.Drawing.Point(22, 17);
+            aboutLabel.Name = "aboutLabel";
+            aboutLabel.Size = new System.Drawing.Size(49, 17);
+            aboutLabel.TabIndex = 0;
+            aboutLabel.Text = "About:";
+            // 
+            // birthdayLabel
+            // 
+            birthdayLabel.AutoSize = true;
+            birthdayLabel.Location = new System.Drawing.Point(22, 40);
+            birthdayLabel.Name = "birthdayLabel";
+            birthdayLabel.Size = new System.Drawing.Size(64, 17);
+            birthdayLabel.TabIndex = 2;
+            birthdayLabel.Text = "Birthday:";
+            // 
+            // imageNormalLabel
+            // 
+            imageNormalLabel.AutoSize = true;
+            imageNormalLabel.Location = new System.Drawing.Point(22, 66);
+            imageNormalLabel.Name = "imageNormalLabel";
+            imageNormalLabel.Size = new System.Drawing.Size(99, 17);
+            imageNormalLabel.TabIndex = 4;
+            imageNormalLabel.Text = "Image Normal:";
+            // 
+            // nameLabel
+            // 
+            nameLabel.AutoSize = true;
+            nameLabel.Location = new System.Drawing.Point(22, 119);
+            nameLabel.Name = "nameLabel";
+            nameLabel.Size = new System.Drawing.Size(49, 17);
+            nameLabel.TabIndex = 6;
+            nameLabel.Text = "Name:";
             // 
             // f_LabelFriendName
             // 
@@ -142,9 +178,45 @@
             this.panel1.Size = new System.Drawing.Size(439, 245);
             this.panel1.TabIndex = 7;
             // 
+            // aboutLabel1
+            // 
+            this.aboutLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "About", true));
+            this.aboutLabel1.Location = new System.Drawing.Point(127, 17);
+            this.aboutLabel1.Name = "aboutLabel1";
+            this.aboutLabel1.Size = new System.Drawing.Size(100, 23);
+            this.aboutLabel1.TabIndex = 1;
+            this.aboutLabel1.Text = "label1";
+            // 
             // userBindingSource
             // 
             this.userBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.User);
+            // 
+            // birthdayLabel1
+            // 
+            this.birthdayLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Birthday", true));
+            this.birthdayLabel1.Location = new System.Drawing.Point(127, 40);
+            this.birthdayLabel1.Name = "birthdayLabel1";
+            this.birthdayLabel1.Size = new System.Drawing.Size(100, 23);
+            this.birthdayLabel1.TabIndex = 3;
+            this.birthdayLabel1.Text = "label1";
+            // 
+            // imageNormalPictureBox
+            // 
+            this.imageNormalPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.userBindingSource, "ImageNormal", true));
+            this.imageNormalPictureBox.Location = new System.Drawing.Point(127, 66);
+            this.imageNormalPictureBox.Name = "imageNormalPictureBox";
+            this.imageNormalPictureBox.Size = new System.Drawing.Size(100, 50);
+            this.imageNormalPictureBox.TabIndex = 5;
+            this.imageNormalPictureBox.TabStop = false;
+            // 
+            // nameLabel1
+            // 
+            this.nameLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Name", true));
+            this.nameLabel1.Location = new System.Drawing.Point(127, 119);
+            this.nameLabel1.Name = "nameLabel1";
+            this.nameLabel1.Size = new System.Drawing.Size(100, 23);
+            this.nameLabel1.TabIndex = 7;
+            this.nameLabel1.Text = "label1";
             // 
             // userBindingNavigator
             // 
@@ -173,9 +245,34 @@
             this.userBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.userBindingNavigator.Name = "userBindingNavigator";
             this.userBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.userBindingNavigator.Size = new System.Drawing.Size(967, 29);
+            this.userBindingNavigator.Size = new System.Drawing.Size(967, 31);
             this.userBindingNavigator.TabIndex = 8;
             this.userBindingNavigator.Text = "bindingNavigator1";
+            // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorAddNewItem.Text = "Add new";
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(45, 28);
+            this.bindingNavigatorCountItem.Text = "of {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
+            // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorDeleteItem.Text = "Delete";
             // 
             // bindingNavigatorMoveFirstItem
             // 
@@ -183,7 +280,7 @@
             this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
             this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
             this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(29, 26);
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorMoveFirstItem.Text = "Move first";
             // 
             // bindingNavigatorMovePreviousItem
@@ -192,13 +289,13 @@
             this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
             this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
             this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(29, 26);
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorMovePreviousItem.Text = "Move previous";
             // 
             // bindingNavigatorSeparator
             // 
             this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 29);
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 31);
             // 
             // bindingNavigatorPositionItem
             // 
@@ -210,17 +307,10 @@
             this.bindingNavigatorPositionItem.Text = "0";
             this.bindingNavigatorPositionItem.ToolTipText = "Current position";
             // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(45, 26);
-            this.bindingNavigatorCountItem.Text = "of {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
-            // 
             // bindingNavigatorSeparator1
             // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 29);
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 31);
             // 
             // bindingNavigatorMoveNextItem
             // 
@@ -228,7 +318,7 @@
             this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
             this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
             this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(29, 26);
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorMoveNextItem.Text = "Move next";
             // 
             // bindingNavigatorMoveLastItem
@@ -237,31 +327,13 @@
             this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
             this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
             this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(29, 26);
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorMoveLastItem.Text = "Move last";
             // 
             // bindingNavigatorSeparator2
             // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 29);
-            // 
-            // bindingNavigatorAddNewItem
-            // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 26);
-            this.bindingNavigatorAddNewItem.Text = "Add new";
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 26);
-            this.bindingNavigatorDeleteItem.Text = "Delete";
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 31);
             // 
             // userBindingNavigatorSaveItem
             // 
@@ -269,80 +341,8 @@
             this.userBindingNavigatorSaveItem.Enabled = false;
             this.userBindingNavigatorSaveItem.Image = ((System.Drawing.Image)(resources.GetObject("userBindingNavigatorSaveItem.Image")));
             this.userBindingNavigatorSaveItem.Name = "userBindingNavigatorSaveItem";
-            this.userBindingNavigatorSaveItem.Size = new System.Drawing.Size(29, 26);
+            this.userBindingNavigatorSaveItem.Size = new System.Drawing.Size(29, 28);
             this.userBindingNavigatorSaveItem.Text = "Save Data";
-            // 
-            // aboutLabel
-            // 
-            aboutLabel.AutoSize = true;
-            aboutLabel.Location = new System.Drawing.Point(22, 17);
-            aboutLabel.Name = "aboutLabel";
-            aboutLabel.Size = new System.Drawing.Size(49, 17);
-            aboutLabel.TabIndex = 0;
-            aboutLabel.Text = "About:";
-            // 
-            // aboutLabel1
-            // 
-            this.aboutLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "About", true));
-            this.aboutLabel1.Location = new System.Drawing.Point(127, 17);
-            this.aboutLabel1.Name = "aboutLabel1";
-            this.aboutLabel1.Size = new System.Drawing.Size(100, 23);
-            this.aboutLabel1.TabIndex = 1;
-            this.aboutLabel1.Text = "label1";
-            // 
-            // birthdayLabel
-            // 
-            birthdayLabel.AutoSize = true;
-            birthdayLabel.Location = new System.Drawing.Point(22, 40);
-            birthdayLabel.Name = "birthdayLabel";
-            birthdayLabel.Size = new System.Drawing.Size(64, 17);
-            birthdayLabel.TabIndex = 2;
-            birthdayLabel.Text = "Birthday:";
-            // 
-            // birthdayLabel1
-            // 
-            this.birthdayLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Birthday", true));
-            this.birthdayLabel1.Location = new System.Drawing.Point(127, 40);
-            this.birthdayLabel1.Name = "birthdayLabel1";
-            this.birthdayLabel1.Size = new System.Drawing.Size(100, 23);
-            this.birthdayLabel1.TabIndex = 3;
-            this.birthdayLabel1.Text = "label1";
-            // 
-            // imageNormalLabel
-            // 
-            imageNormalLabel.AutoSize = true;
-            imageNormalLabel.Location = new System.Drawing.Point(22, 66);
-            imageNormalLabel.Name = "imageNormalLabel";
-            imageNormalLabel.Size = new System.Drawing.Size(99, 17);
-            imageNormalLabel.TabIndex = 4;
-            imageNormalLabel.Text = "Image Normal:";
-            // 
-            // imageNormalPictureBox
-            // 
-            this.imageNormalPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.userBindingSource, "ImageNormal", true));
-            this.imageNormalPictureBox.Location = new System.Drawing.Point(127, 66);
-            this.imageNormalPictureBox.Name = "imageNormalPictureBox";
-            this.imageNormalPictureBox.Size = new System.Drawing.Size(100, 50);
-            this.imageNormalPictureBox.TabIndex = 5;
-            this.imageNormalPictureBox.TabStop = false;
-            // 
-            // nameLabel
-            // 
-            nameLabel.AutoSize = true;
-            nameLabel.Location = new System.Drawing.Point(22, 119);
-            nameLabel.Name = "nameLabel";
-            nameLabel.Size = new System.Drawing.Size(49, 17);
-            nameLabel.TabIndex = 6;
-            nameLabel.Text = "Name:";
-            // 
-            // nameLabel1
-            // 
-            this.nameLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Name", true));
-            this.nameLabel1.Location = new System.Drawing.Point(127, 119);
-            this.nameLabel1.Name = "nameLabel1";
-            this.nameLabel1.Size = new System.Drawing.Size(100, 23);
-            this.nameLabel1.TabIndex = 7;
-            this.nameLabel1.Text = "label1";
             // 
             // FormMosiftDiggingFriend
             // 
@@ -366,10 +366,10 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageNormalPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingNavigator)).EndInit();
             this.userBindingNavigator.ResumeLayout(false);
             this.userBindingNavigator.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imageNormalPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

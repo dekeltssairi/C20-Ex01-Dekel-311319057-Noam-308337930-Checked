@@ -168,8 +168,12 @@
   <ItemGroup>
     <None Include="Resources\Artboard-1-copy-5%402x_220x120.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Ex01\" />
+    <ProjectReference Include="..\FacadeFacebook\FacadeFacebook.csproj">
+      <Project>{62A0A665-0B19-4812-9305-0F989A3A02F6}</Project>
+      <Name>FacadeFacebook</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

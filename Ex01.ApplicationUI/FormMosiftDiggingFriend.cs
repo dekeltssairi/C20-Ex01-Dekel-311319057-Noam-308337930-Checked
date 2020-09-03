@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using FacadeFacebook;
 using FacebookWrapper.ObjectModel;
 using MRG.Controls.UI;
 
@@ -7,21 +8,21 @@ namespace Ex01.ApplicationUI
 {
     public partial class FormMosiftDiggingFriend : Form
     {
-        private User m_MostDiggingFriend;
+        private DigginFriend m_MostDiggingFriend;
         private LoadingCircle m_LoadingCircleShowMostDiggingFriend;
 
-        public FormMosiftDiggingFriend(User i_MostDiggingFriend, int maxNumOfPosts, MRG.Controls.UI.LoadingCircle i_LoadingCircleShowMostDiggingFriend)
+        public FormMosiftDiggingFriend(DigginFriend i_MostDiggingFriend, MRG.Controls.UI.LoadingCircle i_LoadingCircleShowMostDiggingFriend)
         {
             m_MostDiggingFriend = i_MostDiggingFriend;
             m_LoadingCircleShowMostDiggingFriend = i_LoadingCircleShowMostDiggingFriend;
             InitializeComponent();
-            initializeComponent(i_MostDiggingFriend, maxNumOfPosts);
+            initializeComponent(i_MostDiggingFriend);
         }
 
-        private void initializeComponent(User i_Friend, int i_NumOfPosts)
+        private void initializeComponent(DigginFriend i_Friend)         
         {
-            userBindingSource.DataSource = i_Friend;
-            f_LabelNumOfPosts.Text = string.Format("Most Digging Friend is {0}. He post {1} posts last year", i_Friend.Name, i_NumOfPosts.ToString());
+            userBindingSource.DataSource = i_Friend.Friend;
+            f_LabelNumOfPosts.Text = string.Format("Most Digging Friend is {0}. He post {1} posts last year", i_Friend.Friend.Name, i_Friend.NumOfPosts.ToString());
             //f_LabelFriendName.Text = i_Friend.Name;
             //f_PictureBoxProfilePicture.Load(i_Friend.PictureLargeURL);           
         }
