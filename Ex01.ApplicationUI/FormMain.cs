@@ -12,38 +12,40 @@ namespace Ex01.ApplicationUI
 {
     public partial class FormMain : Form
     {
-        private readonly FacadeLayer.FacadeFacebook m_FacadeFacebook = new FacadeLayer.FacadeFacebook();
+        public UISetting UISettings { get; set; }
 
         public FormMain()
         {
             InitializeComponent();
+            if (FacadeLayer.FacadeFacebook.Instance.LogicSettings.RememberUser && !string.IsNullOrEmpty(FacadeLayer.FacadeFacebook.Instance.LogicSettings.LastAccessToken))
+            {
+                UISettings = UISetting.LoadFromFile();
+                applySettings();
+                FacadeLayer.FacadeFacebook.Instance.Connect();
+                userBindingSource.DataSource = FacadeLayer.FacadeFacebook.Instance.LoggedUser;
+                exposeLabels();
+                handleButtonsVisibility();
+            }
+
         }
 
-        private void applyAppSettings()
+        private void applySettings()
         {
             StartPosition = FormStartPosition.Manual;
-            f_CheckBoxRememberMe.Checked = m_FacadeFacebook.LogicSettings.RememberUser;
-            Location = m_FacadeFacebook.LogicSettings.LastWindowLocation;
+            f_CheckBoxRememberMe.Checked = UISettings.RememberMeCheckBox;
+            Location = UISettings.LastWindowLocation;
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            m_FacadeFacebook.LogIn();
-            userBindingSource.DataSource = m_FacadeFacebook.LoggedUser;
+            FacadeLayer.FacadeFacebook.Instance.LogIn();
+            userBindingSource.DataSource = FacadeLayer.FacadeFacebook.Instance.LoggedUser;
             handleButtonsVisibility();
             exposeLabels();
         }
-
-        protected override void OnShown(EventArgs e)
+        private void loadUiSetting()
         {
-            if (m_FacadeFacebook.LogicSettings.RememberUser && !string.IsNullOrEmpty(m_FacadeFacebook.LogicSettings.LastAccessToken))
-            {
-                applyAppSettings();
-                m_FacadeFacebook.Connect();
-                userBindingSource.DataSource = m_FacadeFacebook.LoggedUser;
-                exposeLabels();
-                handleButtonsVisibility();
-            }
+            UISetting uISetting= UISetting.LoadFromFile();
         }
 
         private void exposeLabels()
@@ -66,38 +68,34 @@ namespace Ex01.ApplicationUI
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            /*base.OnFormClosing(e);
-
-            r_AppSettings.LastWindowLocation = Location;
-            r_AppSettings.LastWindowSize = Size;
-            r_AppSettings.RememberUser = f_CheckBoxRememberMe.Checked;
-            if (r_AppSettings.RememberUser == true)
-            {
-                r_AppSettings.LastAccessToken = r_FBConnector.LoginResult.AccessToken;
-            }
-            else
-            {
-                r_AppSettings.LastAccessToken = null;
-            }
-
-            r_AppSettings.SaveToFile();*/
-
             base.OnFormClosing(e);
-
-            //UISetting uiSetting = new UISetting() { LastWindowSize = Size , LastWindowLocation = Location};
-            m_FacadeFacebook.LogicSettings.LastWindowLocation = Location;
-            m_FacadeFacebook.LogicSettings.LastWindowSize = Size;
-            m_FacadeFacebook.LogicSettings.RememberUser = f_CheckBoxRememberMe.Checked;
-            if (m_FacadeFacebook.LogicSettings.RememberUser)
+;
+            if (f_CheckBoxRememberMe.Checked)
             {
-                m_FacadeFacebook.LogicSettings.LastAccessToken = m_FacadeFacebook.LoginResult.AccessToken;
+                FacadeLayer.FacadeFacebook.Instance.LogicSettings.RememberUser= f_CheckBoxRememberMe.Checked;
+                FacadeLayer.FacadeFacebook.Instance.LogicSettings.LastAccessToken = FacadeLayer.FacadeFacebook.Instance.LoginResult.AccessToken;
+                FacadeLayer.FacadeFacebook.Instance.LogicSettings.SaveToFile();
+
+                saveUiSettings();
             }
             else
             {
-                m_FacadeFacebook.LastAccessToken = null;
+                FacadeLayer.FacadeFacebook.Instance.LogicSettings.LastAccessToken = null;
             }
 
-            m_FacadeFacebook.LogicSettings.SaveToFile();
+            FacadeLayer.FacadeFacebook.Instance.LogicSettings.SaveToFile();
+        }
+
+        private void saveUiSettings()
+        {
+            UISettings = new UISetting
+            {
+                LastWindowSize = Size,
+                LastWindowLocation = Location,
+                RememberMeCheckBox = f_CheckBoxRememberMe.Checked
+            };
+
+            UISettings.SaveToFile();
         }
 
         private void clearForm()
@@ -109,7 +107,7 @@ namespace Ex01.ApplicationUI
         private void onFetchPostsThread()
         {
 
-            /*foreach (Post post in m_FacadeFacebook.LoggedUser.Posts)
+            /*foreach (Post post in FacadeLayer.FacadeFacebook.Instance.LoggedUser.Posts)
             {
                 new PostProxy() { Post = post };
                 f_ListBoxPosts.Invoke(new Action(() => f_ListBoxPosts.Items.Add(new PostProxy { Post = post })));
@@ -119,12 +117,12 @@ namespace Ex01.ApplicationUI
             {
                 MessageBox.Show("No Posts to retrieve :(");
             }*/
-            foreach (Post post in m_FacadeFacebook.GetLoggedUserPosts())
+            foreach (Post post in FacadeLayer.FacadeFacebook.Instance.GetLoggedUserPosts())
             {
                 f_ListBoxPosts.Invoke(new Action(() => f_ListBoxPosts.Items.Add(new PostProxy { Post = post })));
             }
 
-            if (!m_FacadeFacebook.IsLoggedUserHasPosts())
+            if (!FacadeLayer.FacadeFacebook.Instance.IsLoggedUserHasPosts())
             {
                 MessageBox.Show("No Posts to retrieve :(");
             }
@@ -138,7 +136,7 @@ namespace Ex01.ApplicationUI
                             r_AppSettings.SaveToFile();
                             clearForm();*/
 
-            m_FacadeFacebook.Logout();
+            FacadeLayer.FacadeFacebook.Instance.Logout();
             clearForm();
 
         }
@@ -161,13 +159,13 @@ namespace Ex01.ApplicationUI
                 new FormFriendList(r_FBConnector.LoggedUser.Friends, f_LoadingCircleShowFriend).ShowDialog();
             }*/
 
-            if (!m_FacadeFacebook.isLoggedUserHasFriends())
+            if (!FacadeLayer.FacadeFacebook.Instance.isLoggedUserHasFriends())
             {
                 MessageBox.Show("No Friends to retrieve :(");
             }
             else
             {
-                new FormFriendList(m_FacadeFacebook.GetLoggedUserFriends(), f_LoadingCircleShowFriend).ShowDialog();
+                new FormFriendList(FacadeLayer.FacadeFacebook.Instance.GetLoggedUserFriends(), f_LoadingCircleShowFriend).ShowDialog();
             }
         }
 
@@ -189,13 +187,13 @@ namespace Ex01.ApplicationUI
                 new FormCheckinList(r_FBConnector.LoggedUser.Checkins, f_LoadingCircleShowCheckins).ShowDialog();
             }*/
 
-            if (!m_FacadeFacebook.IsLoggedUserHasCheckins())
+            if (!FacadeLayer.FacadeFacebook.Instance.IsLoggedUserHasCheckins())
             {
                 MessageBox.Show("No Posts to retrieve :(");
             }
             else
             {
-                new FormCheckinList(m_FacadeFacebook.GetCheckins(), f_LoadingCircleShowCheckins).ShowDialog();
+                new FormCheckinList(FacadeLayer.FacadeFacebook.Instance.GetCheckins(), f_LoadingCircleShowCheckins).ShowDialog();
             }
         }
         private void onFetchEventsThread()
@@ -209,13 +207,13 @@ namespace Ex01.ApplicationUI
                 new FormEventsList(r_FBConnector.LoggedUser.Events, f_LoadingCircleShowEvents).ShowDialog();
             }*/
 
-            if (!m_FacadeFacebook.IsLoggedUserHasEvents())
+            if (!FacadeLayer.FacadeFacebook.Instance.IsLoggedUserHasEvents())
             {
                 MessageBox.Show("No Events to retrieve :(");
             }
             else
             {
-                new FormEventsList(m_FacadeFacebook.GetLoggedUserEvents(), f_LoadingCircleShowEvents).ShowDialog();
+                new FormEventsList(FacadeLayer.FacadeFacebook.Instance.GetLoggedUserEvents(), f_LoadingCircleShowEvents).ShowDialog();
             }
 
 
@@ -262,13 +260,13 @@ namespace Ex01.ApplicationUI
                         new FormMosiftDiggingFriend(mostDiggingFriend, maxNumOfPosts, f_LoadingCircleShowMostDiggingFriend).ShowDialog();
                     }
         */
-            if (!m_FacadeFacebook.isLoggedUserHasFriends())
+            if (!FacadeLayer.FacadeFacebook.Instance.isLoggedUserHasFriends())
             {
                 MessageBox.Show("You Don't have any friends :(");
             }
             else
             {
-                DigginFriend digginFriend = m_FacadeFacebook.GetDigginFriend();
+                DigginFriend digginFriend = FacadeLayer.FacadeFacebook.Instance.GetDigginFriend();
 
                 new FormMosiftDiggingFriend(digginFriend, f_LoadingCircleShowMostDiggingFriend).ShowDialog();
             }
@@ -293,7 +291,7 @@ namespace Ex01.ApplicationUI
         {
             try
             {
-                new FormCovid19CheckedIn(m_FacadeFacebook.LoggedUser).ShowDialog();
+                new FormCovid19CheckedIn(FacadeLayer.FacadeFacebook.Instance.LoggedUser).ShowDialog();
             }
             catch (Exception)
             {
@@ -303,7 +301,7 @@ namespace Ex01.ApplicationUI
 
         private void onShowAlbumsThread()
         {
-            /*            if (m_FacadeFacebook.LoggedUser.Albums.Count == 0)
+            /*            if (FacadeLayer.FacadeFacebook.Instance.LoggedUser.Albums.Count == 0)
                         {
                             MessageBox.Show("No Albums to retrieve :(");
                         }
@@ -312,21 +310,21 @@ namespace Ex01.ApplicationUI
                             new FormAlbums(r_FBConnector.LoggedUser.Albums, f_LoadingCircleShowMyAlbums).ShowDialog();
                         }*/
 
-            if (!m_FacadeFacebook.IsLoggedUserHasAlbums())
+            if (!FacadeLayer.FacadeFacebook.Instance.IsLoggedUserHasAlbums())
             {
                 MessageBox.Show("No Albums to retrieve :(");
             }
             else
             {
-                new FormAlbums(m_FacadeFacebook.GetLoggedUserAlbums(), f_LoadingCircleShowMyAlbums).ShowDialog();
+                new FormAlbums(FacadeLayer.FacadeFacebook.Instance.GetLoggedUserAlbums(), f_LoadingCircleShowMyAlbums).ShowDialog();
             }
         }
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            //m_FacadeFacebook.Connect(m_FacadeFacebook.LastAccessToken);
-            m_FacadeFacebook.Connect();
-            userBindingSource.DataSource = m_FacadeFacebook.LoggedUser;
+            //FacadeLayer.FacadeFacebook.Instance.Connect(FacadeLayer.FacadeFacebook.Instance.LastAccessToken);
+            FacadeLayer.FacadeFacebook.Instance.Connect();
+            userBindingSource.DataSource = FacadeLayer.FacadeFacebook.Instance.LoggedUser;
             handleButtonsVisibility();
             exposeLabels();
 
@@ -339,7 +337,7 @@ namespace Ex01.ApplicationUI
             handleButtonsVisibility();
             exposeLabels();*/
 
-            userBindingSource.DataSource = m_FacadeFacebook.LoggedUser;
+            userBindingSource.DataSource = FacadeLayer.FacadeFacebook.Instance.LoggedUser;
             handleButtonsVisibility();
             exposeLabels();
         }

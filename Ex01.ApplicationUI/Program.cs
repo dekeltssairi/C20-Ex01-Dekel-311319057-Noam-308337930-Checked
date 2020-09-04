@@ -15,7 +15,7 @@ namespace Ex01.ApplicationUI
 {
 
     // $G$ CSS-999 (-5) Access modifiers are missing
-    static class Program
+    public static class Program
     {
         [STAThread]
         static void Main()

@@ -11,14 +11,10 @@ namespace FacadeFacebook
     public class LogicSettings                                  // should split to logic setting and ui setting.
     {
         public bool RememberUser { get; set; }
-
         public string LastAccessToken { get; set; }
 
-        public Point LastWindowLocation { get; set; }
 
-        public Size LastWindowSize { get; set; }
-
-        private const string k_SettingsFileSuffix = @"\\AppSettings.xml";
+        private const string k_SettingsFileSuffix = @"\\LogicSettings.xml";
 
         public static LogicSettings LoadFromFile()
         {
@@ -33,18 +29,11 @@ namespace FacadeFacebook
                 }
             }
 
-            if (logicSettings.RememberUser == false)
-            {
-                logicSettings.initialize();
-            }
-
             return logicSettings;
         }
 
         private void initialize()
         {
-            LastWindowLocation = new Point(20, 20);
-            LastWindowSize = new Size(1150, 640);
             RememberUser = false;
             LastAccessToken = null;
         }

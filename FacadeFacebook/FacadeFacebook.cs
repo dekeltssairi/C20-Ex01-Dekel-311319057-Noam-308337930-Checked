@@ -9,8 +9,35 @@ using System.Text;
 
 namespace FacadeLayer
 {
+/*    public sealed class Singleton
+    {
+        private static readonly Lazy<Singleton>
+            lazy =
+            new Lazy<Singleton>
+                (() => new Singleton());
+
+        public static Singleton Instance { get { return lazy.Value; } }
+
+        private Singleton()
+        {
+        }
+    }*/
+
+
     public class FacadeFacebook
     {
+        private static readonly Lazy<FacadeFacebook>
+            lazy =
+            new Lazy<FacadeFacebook>
+                (() => new FacadeFacebook());
+
+        public static FacadeFacebook Instance { get { return lazy.Value; } }
+
+        private FacadeFacebook()
+        {
+            LogicSettings = LogicSettings.LoadFromFile();
+        }
+
         public LoginResult LoginResult { get; set; }
         public User LoggedUser { get; set; }
         public string AccessToken { get; set; }
@@ -22,16 +49,6 @@ namespace FacadeLayer
         public Size LastWindowSize { get; set; }
 
         private string k_AppId = "343280916704350";
-
-        public FacadeFacebook()
-        {
-            LogicSettings = LogicSettings.LoadFromFile();
-            RememberUser = LogicSettings.RememberUser;
-            LastWindowLocation = LogicSettings.LastWindowLocation;
-        }
-
-
-
 
 
 
