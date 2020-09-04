@@ -43,10 +43,6 @@ namespace Ex01.ApplicationUI
             handleButtonsVisibility();
             exposeLabels();
         }
-        private void loadUiSetting()
-        {
-            UISetting uISetting= UISetting.LoadFromFile();
-        }
 
         private void exposeLabels()
         {

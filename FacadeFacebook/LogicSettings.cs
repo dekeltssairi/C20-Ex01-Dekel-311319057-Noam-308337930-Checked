@@ -28,6 +28,10 @@ namespace FacadeFacebook
                     logicSettings = serializer.Deserialize(xmlStream) as LogicSettings;
                 }
             }
+            else
+            {
+                logicSettings.initialize();
+            }
 
             return logicSettings;
         }
@@ -38,10 +42,7 @@ namespace FacadeFacebook
             LastAccessToken = null;
         }
 
-        private LogicSettings()
-        {
-            initialize();
-        }
+        public LogicSettings(){}
 
         public void SaveToFile()
         {

@@ -43,10 +43,6 @@ namespace FacadeLayer
         public string AccessToken { get; set; }
 
         public LogicSettings LogicSettings{ get; set; }
-        public bool RememberUser { get; set; }
-        public Point LastWindowLocation { get; set; }
-        public string LastAccessToken { get; set; }
-        public Size LastWindowSize { get; set; }
 
         private string k_AppId = "343280916704350";
 
@@ -103,10 +99,6 @@ namespace FacadeLayer
 
             return new DigginFriend(mostDiggingFriend, maxNumOfPosts);
         }
-
-
-
-
 
         public void LogIn()
         {

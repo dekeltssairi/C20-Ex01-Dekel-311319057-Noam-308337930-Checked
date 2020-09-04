@@ -13,11 +13,11 @@ namespace Ex01.ApplicationUI
 
         private const string k_SettingsFileSuffix = @"\\UISettings.xml";
 
-       /* private void initialize()
+        private void initialize()
         {
             LastWindowLocation = new Point(20, 20);
             LastWindowSize = new Size(1150, 640);
-        }*/
+        }
 
         public static UISetting LoadFromFile()
         {
@@ -31,10 +31,15 @@ namespace Ex01.ApplicationUI
                     uiSetting = serializer.Deserialize(xmlStream) as UISetting;
                 }
             }
+            else
+            {
+                uiSetting.initialize();
+            }
 
 
             return uiSetting;
         }
+        public UISetting() { }
 
         public void SaveToFile()
         {
@@ -49,6 +54,7 @@ namespace Ex01.ApplicationUI
                 serializer.Serialize(xmlStream, this);
             }
         }
+
     }
 }
 
