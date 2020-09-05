@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace FacadeFacebook
+namespace FacadeLayer
 {
     [Serializable]
     public class SingletonException

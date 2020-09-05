@@ -281,6 +281,7 @@
             this.f_CheckBoxRememberMe.TabIndex = 85;
             this.f_CheckBoxRememberMe.Text = "Remember me";
             this.f_CheckBoxRememberMe.UseVisualStyleBackColor = true;
+            this.f_CheckBoxRememberMe.Visible = false;
             // 
             // f_LoadingCircleShowMostDiggingFriend
             // 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FacadeFacebook
+namespace FacadeLayer
 {
     public class ConfirmedSickLocation
     {

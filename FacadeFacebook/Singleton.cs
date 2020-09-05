@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace FacadeFacebook
+namespace FacadeLayer
 {
 	public static class Singleton<T>
 		where T : class

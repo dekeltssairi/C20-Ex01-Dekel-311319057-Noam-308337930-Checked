@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 
-namespace FacadeFacebook
+namespace FacadeLayer
 {
     public class Covid19SickPeople
     {

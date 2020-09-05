@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using FacadeFacebook;
+using FacadeLayer;
 using FacebookWrapper.ObjectModel;
 using MRG.Controls.UI;
 

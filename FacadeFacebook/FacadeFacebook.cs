@@ -1,11 +1,7 @@
-﻿using FacadeFacebook;
-using FacebookWrapper;
+﻿using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 
 namespace FacadeLayer
 {
@@ -22,9 +18,13 @@ namespace FacadeLayer
 
         public LoginResult LoginResult { get; set; }
         public User LoggedUser { get; set; }
-        public string AccessToken { get; set; }
-
+        
         public LogicSettings LogicSettings{ get; set; }
+
+        public bool ShouldRestoreSettings()
+        {
+            return LogicSettings.RememberUser && !string.IsNullOrEmpty(LogicSettings.LastAccessToken);
+        }
 
         private string k_AppId = "343280916704350";
 
@@ -91,16 +91,15 @@ namespace FacadeLayer
                 "user_posts",
                 "user_photos",
                 "user_videos");
-            AccessToken = LoginResult.AccessToken;
-
-            LogicSettings.LastAccessToken = AccessToken;
+            
+            LogicSettings.LastAccessToken = LoginResult.AccessToken;
 
             LoggedUser = LoginResult.LoggedInUser;
         }
 
-        public void Connect(string i_LastAccessToken)
+        public bool IsUserLogin()
         {
-            LoginResult = FacebookService.Connect(i_LastAccessToken);
+            return LoggedUser != null;
         }
 
         public void Connect()

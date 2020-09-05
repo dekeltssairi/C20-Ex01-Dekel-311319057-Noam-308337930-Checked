@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace FacadeFacebook
+namespace FacadeLayer
 {
     public abstract class Settings
     {
@@ -26,16 +26,16 @@ namespace FacadeFacebook
             {
                 using (Stream xmlStream = new FileStream(Directory.GetCurrentDirectory() + r_SettingsFileSuffix, FileMode.Open))
                 {
-                    XmlSerializer serializer = new XmlSerializer(this.GetType());       // reflection: can change at run time
+                    XmlSerializer serializer = new XmlSerializer(this.GetType());       // reflection: can change at run time due to inheritnace
                     settings = serializer.Deserialize(xmlStream) as Settings;
                 }
             }
             else
             {
-                settings = Activator.CreateInstance(this.GetType()) as Settings;        // reflection: can change at run time
+                
+                settings = Activator.CreateInstance(this.GetType()) as Settings;        // reflection: can change at run time due to inheritnace
                 settings.initialize();
             }
-
 
             return settings;
         }
