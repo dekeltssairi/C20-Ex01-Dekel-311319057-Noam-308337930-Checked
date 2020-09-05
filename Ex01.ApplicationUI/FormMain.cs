@@ -19,7 +19,7 @@ namespace Ex01.ApplicationUI
             InitializeComponent();
             if (FacadeLayer.FacadeFacebook.Instance.LogicSettings.RememberUser && !string.IsNullOrEmpty(FacadeLayer.FacadeFacebook.Instance.LogicSettings.LastAccessToken))
             {
-                UISettings = UISetting.LoadFromFile();
+                UISettings = new UISetting().LoadFromFile() as UISetting;
                 applySettings();
                 FacadeLayer.FacadeFacebook.Instance.Connect();
                 userBindingSource.DataSource = FacadeLayer.FacadeFacebook.Instance.LoggedUser;
@@ -102,17 +102,6 @@ namespace Ex01.ApplicationUI
 
         private void onFetchPostsThread()
         {
-
-            /*foreach (Post post in FacadeLayer.FacadeFacebook.Instance.LoggedUser.Posts)
-            {
-                new PostProxy() { Post = post };
-                f_ListBoxPosts.Invoke(new Action(() => f_ListBoxPosts.Items.Add(new PostProxy { Post = post })));
-            }
-
-            if (r_FBConnector.LoggedUser.Posts.Count == 0)
-            {
-                MessageBox.Show("No Posts to retrieve :(");
-            }*/
             foreach (Post post in FacadeLayer.FacadeFacebook.Instance.GetLoggedUserPosts())
             {
                 f_ListBoxPosts.Invoke(new Action(() => f_ListBoxPosts.Items.Add(new PostProxy { Post = post })));

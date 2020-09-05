@@ -35,7 +35,7 @@ namespace FacadeLayer
 
         private FacadeFacebook()
         {
-            LogicSettings = LogicSettings.LoadFromFile();
+            LogicSettings = new LogicSettings().LoadFromFile() as LogicSettings;
         }
 
         public LoginResult LoginResult { get; set; }
