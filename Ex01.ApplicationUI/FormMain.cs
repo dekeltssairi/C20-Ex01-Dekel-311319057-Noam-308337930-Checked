@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading;
 using System.Windows.Forms;
-using Ex01.ApplicationEngine;
 using FacadeFacebook;
-using FacadeLayer;
-using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
 namespace Ex01.ApplicationUI
 {
@@ -115,12 +111,6 @@ namespace Ex01.ApplicationUI
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
-            /*                FacebookService.Logout(() => { });
-                            f_CheckBoxRememberMe.Checked = false;
-                            r_AppSettings.RememberUser = false;
-                            r_AppSettings.SaveToFile();
-                            clearForm();*/
-
             FacadeLayer.FacadeFacebook.Instance.Logout();
             clearForm();
 
@@ -135,15 +125,6 @@ namespace Ex01.ApplicationUI
 
         private void onShowFriendsThread()
         {
-            /*if (r_FBConnector.LoggedUser.Friends.Count == 0)
-            {
-                MessageBox.Show("No Friends to retrieve :(");
-            }
-            else
-            {
-                new FormFriendList(r_FBConnector.LoggedUser.Friends, f_LoadingCircleShowFriend).ShowDialog();
-            }*/
-
             if (!FacadeLayer.FacadeFacebook.Instance.isLoggedUserHasFriends())
             {
                 MessageBox.Show("No Friends to retrieve :(");
@@ -163,15 +144,6 @@ namespace Ex01.ApplicationUI
 
         private void onShowCheckinsThread()
         {
-            /*if (r_FBConnector.LoggedUser.Checkins.Count == 0)
-            {
-                MessageBox.Show("No Posts to retrieve :(");
-            }
-            else
-            {
-                new FormCheckinList(r_FBConnector.LoggedUser.Checkins, f_LoadingCircleShowCheckins).ShowDialog();
-            }*/
-
             if (!FacadeLayer.FacadeFacebook.Instance.IsLoggedUserHasCheckins())
             {
                 MessageBox.Show("No Posts to retrieve :(");
@@ -183,15 +155,6 @@ namespace Ex01.ApplicationUI
         }
         private void onFetchEventsThread()
         {
-            /*if (r_FBConnector.LoggedUser.Events.Count == 0)
-            {
-                MessageBox.Show("No Events to retrieve :(");
-            }
-            else
-            {
-                new FormEventsList(r_FBConnector.LoggedUser.Events, f_LoadingCircleShowEvents).ShowDialog();
-            }*/
-
             if (!FacadeLayer.FacadeFacebook.Instance.IsLoggedUserHasEvents())
             {
                 MessageBox.Show("No Events to retrieve :(");
@@ -200,51 +163,10 @@ namespace Ex01.ApplicationUI
             {
                 new FormEventsList(FacadeLayer.FacadeFacebook.Instance.GetLoggedUserEvents(), f_LoadingCircleShowEvents).ShowDialog();
             }
-
-
-            //eventBindingSource.DataSource = r_FBConnector.LoggedUser.Events;
-            /*f_ListBoxEvents.DisplayMember = "Name";
-            foreach (Event fbEvent in r_FBConnector.LoggedUser.Events)
-            {
-                f_ListBoxEvents.Items.Add(fbEvent);
-            }*/
         }
 
         private void onMostDiggingFriendThread()
         {
-            /*        if (r_FBConnector.LoggedUser.Friends.Count == 0)
-                    {
-                        MessageBox.Show("You Don't have any friends :(");
-                    }
-                    else
-                    {
-                        f_LoadingCircleShowMostDiggingFriend.Visible = true;
-                        f_LoadingCircleShowMostDiggingFriend.Active = true;
-                        DateTime lastYear = DateTime.Today.AddYears(-1);
-                        User mostDiggingFriend = null;
-                        int postCounter, maxNumOfPosts = 0;
-
-                        foreach (User friend in r_FBConnector.LoggedUser.Friends)
-                        {
-                            postCounter = 0;
-                            foreach (Post post in friend.Posts)
-                            {
-                                if (post.CreatedTime > lastYear)
-                                {
-                                    postCounter++;
-                                }
-                            }
-
-                            if (postCounter > maxNumOfPosts)
-                            {
-                                maxNumOfPosts = postCounter;
-                                mostDiggingFriend = friend;
-                            }
-                        }
-
-                        new FormMosiftDiggingFriend(mostDiggingFriend, maxNumOfPosts, f_LoadingCircleShowMostDiggingFriend).ShowDialog();
-                    }
-        */
             if (!FacadeLayer.FacadeFacebook.Instance.isLoggedUserHasFriends())
             {
                 MessageBox.Show("You Don't have any friends :(");
@@ -255,7 +177,6 @@ namespace Ex01.ApplicationUI
 
                 new FormMosiftDiggingFriend(digginFriend, f_LoadingCircleShowMostDiggingFriend).ShowDialog();
             }
-
         }
 
         private void buttonMostDiggingFriend_Click(object sender, EventArgs e)
@@ -263,7 +184,6 @@ namespace Ex01.ApplicationUI
             f_LoadingCircleShowMostDiggingFriend.Visible = true;
             f_LoadingCircleShowMostDiggingFriend.Active = true;
             new Thread(onMostDiggingFriendThread).Start();
-
         }
 
 
@@ -286,15 +206,6 @@ namespace Ex01.ApplicationUI
 
         private void onShowAlbumsThread()
         {
-            /*            if (FacadeLayer.FacadeFacebook.Instance.LoggedUser.Albums.Count == 0)
-                        {
-                            MessageBox.Show("No Albums to retrieve :(");
-                        }
-                        else
-                        {
-                            new FormAlbums(r_FBConnector.LoggedUser.Albums, f_LoadingCircleShowMyAlbums).ShowDialog();
-                        }*/
-
             if (!FacadeLayer.FacadeFacebook.Instance.IsLoggedUserHasAlbums())
             {
                 MessageBox.Show("No Albums to retrieve :(");
@@ -307,21 +218,14 @@ namespace Ex01.ApplicationUI
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            //FacadeLayer.FacadeFacebook.Instance.Connect(FacadeLayer.FacadeFacebook.Instance.LastAccessToken);
             FacadeLayer.FacadeFacebook.Instance.Connect();
             userBindingSource.DataSource = FacadeLayer.FacadeFacebook.Instance.LoggedUser;
             handleButtonsVisibility();
             exposeLabels();
-
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-            /*r_FBConnector.LoggedUser = r_FBConnector.LoginResult.LoggedInUser;
-            userBindingSource.DataSource = r_FBConnector.LoggedUser;
-            handleButtonsVisibility();
-            exposeLabels();*/
-
             userBindingSource.DataSource = FacadeLayer.FacadeFacebook.Instance.LoggedUser;
             handleButtonsVisibility();
             exposeLabels();
