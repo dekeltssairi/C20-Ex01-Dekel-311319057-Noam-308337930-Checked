@@ -1,7 +1,7 @@
-﻿using FacebookWrapper;
-using FacebookWrapper.ObjectModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using FacebookWrapper;
+using FacebookWrapper.ObjectModel;
 
 namespace FacadeLayer
 {
@@ -9,17 +9,22 @@ namespace FacadeLayer
     {
         public static FacadeFacebook Instance
         {
-            get { return Singleton<FacadeFacebook>.Instance; }
+            get
+            {
+                return Singleton<FacadeFacebook>.Instance;
+            }
         }
+
         private FacadeFacebook()
         {
             LogicSettings = new LogicSettings().LoadFromFile() as LogicSettings;
         }
 
         public LoginResult LoginResult { get; set; }
+
         public User LoggedUser { get; set; }
         
-        public LogicSettings LogicSettings{ get; set; }
+        public LogicSettings LogicSettings { get; set; }
 
         public bool ShouldRestoreSettings()
         {
@@ -27,8 +32,6 @@ namespace FacadeLayer
         }
 
         private string k_AppId = "343280916704350";
-
-
 
         public FacebookObjectCollection<User> GetFriends()
         {
@@ -114,7 +117,6 @@ namespace FacadeLayer
             LogicSettings.RememberUser = false;
             LogicSettings.SaveToFile();
         }
-
 
         public bool IsLoggedUserHasAlbums()
         {

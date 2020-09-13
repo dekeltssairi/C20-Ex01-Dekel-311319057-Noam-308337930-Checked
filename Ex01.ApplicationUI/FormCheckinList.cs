@@ -10,6 +10,7 @@ namespace Ex01.ApplicationUI
     {
         private readonly LoadingCircle m_LoadingCircleShowCheckins;
         private readonly FacebookObjectCollection<CheckinProxy> m_Checkins;
+
         public FormCheckinList(FacebookObjectCollection<Checkin> i_Checkins, MRG.Controls.UI.LoadingCircle i_LoadingCircleShowCheckins)
         {
             m_LoadingCircleShowCheckins = i_LoadingCircleShowCheckins;
@@ -22,7 +23,6 @@ namespace Ex01.ApplicationUI
             InitializeComponent();
             initializeComponent();
         }
-
 
         private void initializeComponent()
         {
@@ -39,8 +39,5 @@ namespace Ex01.ApplicationUI
                 m_LoadingCircleShowCheckins.Enabled = false;
             }));
         }
-
     }
 }
-
-

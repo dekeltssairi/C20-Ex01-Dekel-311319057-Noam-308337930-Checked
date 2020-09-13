@@ -2,7 +2,7 @@
 
 namespace Ex01.ApplicationUI
 {
-    partial class FormFriendList
+    public partial class FormFriendList
     {
         /// <summary>
         /// Required designer variable.

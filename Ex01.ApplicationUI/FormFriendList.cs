@@ -8,14 +8,13 @@ namespace Ex01.ApplicationUI
     {
         private readonly FacebookObjectCollection<User> r_Friends;
         private readonly MRG.Controls.UI.LoadingCircle m_LoadingCircleShowFriend;
+
         public FormFriendList(FacebookObjectCollection<User> i_friends, MRG.Controls.UI.LoadingCircle i_LoadingCircleShowFriend)
         {
             r_Friends = i_friends;
             m_LoadingCircleShowFriend = i_LoadingCircleShowFriend;
             InitializeComponent();
             initializeComponent();
-            
-
         }
 
         private void initializeComponent()

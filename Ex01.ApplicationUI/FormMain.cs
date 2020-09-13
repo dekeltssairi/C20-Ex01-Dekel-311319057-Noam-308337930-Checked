@@ -24,7 +24,6 @@ namespace Ex01.ApplicationUI
             }
         }
 
-
         private void handleControlsVisibility()
         {
             handleLabels();
@@ -74,19 +73,16 @@ namespace Ex01.ApplicationUI
         {
             FacadeFacebook.Instance.Logout();
             clearForm();
-
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
-;
-            if (f_CheckBoxRememberMe.Checked && FacadeFacebook.Instance.IsUserLogin())
+            if (f_CheckBoxRememberMe.Checked == true && FacadeFacebook.Instance.IsUserLogin() == true)
             {
-                FacadeFacebook.Instance.LogicSettings.RememberUser= f_CheckBoxRememberMe.Checked;
+                FacadeFacebook.Instance.LogicSettings.RememberUser = f_CheckBoxRememberMe.Checked;
                 FacadeFacebook.Instance.LogicSettings.LastAccessToken = FacadeFacebook.Instance.LoginResult.AccessToken;
                 FacadeFacebook.Instance.LogicSettings.SaveToFile();
-
                 saveUiSettings();
             }
             else
@@ -151,9 +147,10 @@ namespace Ex01.ApplicationUI
                 new FormCheckinList(FacadeFacebook.Instance.GetCheckins(), f_LoadingCircleShowCheckins).ShowDialog();
             }
         }
+
         private void onFetchEventsThread()
         {
-            if (!FacadeFacebook.Instance.IsLoggedUserHasEvents())
+            if (!FacadeFacebook.Instance.IsLoggedUserHasEvents() == true)
             {
                 MessageBox.Show("No Events to retrieve :(");
             }
@@ -165,7 +162,7 @@ namespace Ex01.ApplicationUI
 
         private void onMostDiggingFriendThread()
         {
-            if (!FacadeFacebook.Instance.isLoggedUserHasFriends())
+            if (!FacadeFacebook.Instance.isLoggedUserHasFriends() == true)
             {
                 MessageBox.Show("You Don't have any friends :(");
             }

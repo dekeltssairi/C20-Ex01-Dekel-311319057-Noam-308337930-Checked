@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Ex01.ApplicationEngine;
+using FacadeLayer;
 using FacebookWrapper.ObjectModel;
 
 namespace Ex01.ApplicationUI

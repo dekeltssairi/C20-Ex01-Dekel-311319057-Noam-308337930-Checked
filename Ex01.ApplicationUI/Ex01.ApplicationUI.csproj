@@ -95,20 +95,13 @@
     <Compile Include="UISetting.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Ex01.ApplicationEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\C20 Ex01 Dekel 311319057 Noam 308337930\Ex01.ApplicationEngine\bin\Debug\Ex01.ApplicationEngine.dll</HintPath>
-    </Reference>
     <Reference Include="Facebook">
-      <HintPath>..\..\C20 Ex01 Dekel 311319057 Noam 308337930\Ex01.ApplicationEngine\bin\Debug\Facebook.dll</HintPath>
+      <HintPath>..\FacadeFacebook\Lib\Facebook.dll</HintPath>
     </Reference>
     <Reference Include="FbGraphApiWrapper">
-      <HintPath>..\..\C20 Ex01 Dekel 311319057 Noam 308337930\Ex01.ApplicationEngine\bin\Debug\FbGraphApiWrapper.dll</HintPath>
+      <HintPath>..\FacadeFacebook\Lib\FbGraphApiWrapper.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="MRG.Controls.UI">
-      <HintPath>..\MRG.Controls.UI\bin\Debug\MRG.Controls.UI.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -174,6 +167,10 @@
     <ProjectReference Include="..\FacadeFacebook\FacadeFacebook.csproj">
       <Project>{62A0A665-0B19-4812-9305-0F989A3A02F6}</Project>
       <Name>FacadeFacebook</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MRG.Controls.UI\MRG.Controls.UI.csproj">
+      <Project>{48e18b56-4c37-4d69-aba7-429c42b45aac}</Project>
+      <Name>MRG.Controls.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
