@@ -24,7 +24,6 @@ namespace Ex01.ApplicationUI
             }
         }
 
-
         private void handleControlsVisibility()
         {
             handleLabels();
@@ -74,19 +73,17 @@ namespace Ex01.ApplicationUI
         {
             FacadeFacebook.Instance.Logout();
             clearForm();
-
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
-;
+
             if (f_CheckBoxRememberMe.Checked && FacadeFacebook.Instance.IsUserLogin())
             {
-                FacadeFacebook.Instance.LogicSettings.RememberUser= f_CheckBoxRememberMe.Checked;
+                FacadeFacebook.Instance.LogicSettings.RememberUser = f_CheckBoxRememberMe.Checked;
                 FacadeFacebook.Instance.LogicSettings.LastAccessToken = FacadeFacebook.Instance.LoginResult.AccessToken;
                 FacadeFacebook.Instance.LogicSettings.SaveToFile();
-
                 saveUiSettings();
             }
             else
@@ -151,6 +148,7 @@ namespace Ex01.ApplicationUI
                 new FormCheckinList(FacadeFacebook.Instance.GetCheckins(), f_LoadingCircleShowCheckins).ShowDialog();
             }
         }
+
         private void onFetchEventsThread()
         {
             if (!FacadeFacebook.Instance.IsLoggedUserHasEvents())

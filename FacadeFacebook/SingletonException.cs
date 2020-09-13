@@ -15,6 +15,7 @@ namespace FacadeLayer
            : base(message)
         {
         }
+
         public SingletonException(Exception innerException)
            : base(null, innerException)
         {

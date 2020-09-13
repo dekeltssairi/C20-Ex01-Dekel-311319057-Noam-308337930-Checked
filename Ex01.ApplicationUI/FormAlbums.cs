@@ -27,6 +27,5 @@ namespace Ex01.ApplicationUI
                 m_LoadingCircleShowMyAlbums.Enabled = false;
             }));
         }
-
     }
 }

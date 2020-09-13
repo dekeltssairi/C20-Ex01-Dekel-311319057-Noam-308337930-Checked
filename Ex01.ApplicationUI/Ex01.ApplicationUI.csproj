@@ -95,10 +95,6 @@
     <Compile Include="UISetting.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Ex01.ApplicationEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\C20 Ex01 Dekel 311319057 Noam 308337930\Ex01.ApplicationEngine\bin\Debug\Ex01.ApplicationEngine.dll</HintPath>
-    </Reference>
     <Reference Include="Facebook">
       <HintPath>..\..\C20 Ex01 Dekel 311319057 Noam 308337930\Ex01.ApplicationEngine\bin\Debug\Facebook.dll</HintPath>
     </Reference>
