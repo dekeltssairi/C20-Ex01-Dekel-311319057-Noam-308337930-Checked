@@ -11,6 +11,7 @@ namespace FacadeLayer
 {
     public abstract class Settings
     {
+
         protected readonly string r_SettingsFileSuffix;
 
         public virtual void initialize()
@@ -31,6 +32,7 @@ namespace FacadeLayer
             }
             else
             {
+                
                 settings = Activator.CreateInstance(this.GetType()) as Settings;        // reflection: can change at run time due to inheritnace
                 settings.initialize();
             }
@@ -42,6 +44,7 @@ namespace FacadeLayer
         {
             r_SettingsFileSuffix = i_SettingsFileSuffix;
         }
+
 
         public void SaveToFile()
         {
@@ -56,5 +59,6 @@ namespace FacadeLayer
                 serializer.Serialize(xmlStream, this);
             }
         }
+
     }
 }

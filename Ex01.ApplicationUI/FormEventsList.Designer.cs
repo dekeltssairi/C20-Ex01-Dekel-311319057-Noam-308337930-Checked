@@ -1,6 +1,6 @@
 ﻿namespace Ex01.ApplicationUI
 {
-    public partial class FormEventsList
+    partial class FormEventsList
     {
         /// <summary>
         /// Required designer variable.
@@ -17,7 +17,6 @@
             {
                 components.Dispose();
             }
-
             base.Dispose(disposing);
         }
 

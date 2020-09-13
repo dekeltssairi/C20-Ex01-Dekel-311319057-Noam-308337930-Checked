@@ -1,6 +1,6 @@
 ﻿namespace Ex01.ApplicationUI
 {
-    public partial class FormCovid19CheckedIn
+    partial class FormCovid19CheckedIn
     {
         /// <summary>
         /// Required designer variable.

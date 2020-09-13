@@ -23,6 +23,8 @@ namespace Ex01.ApplicationUI
         {
             userBindingSource.DataSource = i_Friend.Friend;
             f_LabelNumOfPosts.Text = string.Format("Most Digging Friend is {0}. He post {1} posts last year", i_Friend.Friend.Name, i_Friend.NumOfPosts.ToString());
+            //f_LabelFriendName.Text = i_Friend.Name;
+            //f_PictureBoxProfilePicture.Load(i_Friend.PictureLargeURL);           
         }
 
         protected override void OnShown(EventArgs e)
@@ -34,6 +36,7 @@ namespace Ex01.ApplicationUI
                 m_LoadingCircleShowMostDiggingFriend.Visible = false;
                 m_LoadingCircleShowMostDiggingFriend.Enabled = false;
             }));
+
         }
     }
 }

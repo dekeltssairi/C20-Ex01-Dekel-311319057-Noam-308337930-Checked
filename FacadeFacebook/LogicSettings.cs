@@ -8,10 +8,9 @@ using System.Xml.Serialization;
 
 namespace FacadeLayer
 {
-    public class LogicSettings : Settings
+    public class LogicSettings : Settings                                  // should split to logic setting and ui setting.
     {
         public bool RememberUser { get; set; }
-
         public string LastAccessToken { get; set; }
 
         public override void initialize()
@@ -20,8 +19,7 @@ namespace FacadeLayer
             LastAccessToken = null;
         }
 
-        public LogicSettings() : base(@"\\LogicSettings.xml")
-        {
-        }
+        public LogicSettings():base(@"\\LogicSettings.xml"){}
+
     }
 }

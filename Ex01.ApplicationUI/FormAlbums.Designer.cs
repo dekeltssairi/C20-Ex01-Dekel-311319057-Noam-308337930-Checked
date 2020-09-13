@@ -1,6 +1,6 @@
 ﻿namespace Ex01.ApplicationUI
 {
-    public partial class FormAlbums
+    partial class FormAlbums
     {
         /// <summary>
         /// Required designer variable.

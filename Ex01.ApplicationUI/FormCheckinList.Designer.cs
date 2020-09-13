@@ -1,6 +1,6 @@
 ﻿namespace Ex01.ApplicationUI
 {
-    public partial class FormCheckinList
+    partial class FormCheckinList
     {
         /// <summary>
         /// Required designer variable.

@@ -61,7 +61,7 @@ namespace FacadeLayer
 
         public void AddConfirmedLocationTotheList(ConfirmedSickLocation i_confirmedSickLocation)
         {
-            if (!CheckIfLocationIsInTheList(i_confirmedSickLocation) == true)
+            if(!CheckIfLocationIsInTheList(i_confirmedSickLocation) == true)
             {
                 ConfirmedSickLocations.Add(i_confirmedSickLocation);
             }
@@ -69,7 +69,7 @@ namespace FacadeLayer
 
         public bool CheckIfLocationIsInTheList(ConfirmedSickLocation i_Location)
         {
-            foreach (ConfirmedSickLocation confirmedSickLocation in ConfirmedSickLocations)
+            foreach(ConfirmedSickLocation confirmedSickLocation in ConfirmedSickLocations)
             {
                 if (confirmedSickLocation.Location == i_Location.Location)
                 {

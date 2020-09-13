@@ -1,6 +1,6 @@
 ﻿namespace Ex01.ApplicationUI
 {
-    public partial class FormMosiftDiggingFriend
+    partial class FormMosiftDiggingFriend
     {
         /// <summary>
         /// Required designer variable.

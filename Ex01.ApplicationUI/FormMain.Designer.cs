@@ -1,6 +1,6 @@
 ﻿namespace Ex01.ApplicationUI
 {
-    public partial class FormMain
+    partial class FormMain
     {
         /// <summary>
         /// Required designer variable.
